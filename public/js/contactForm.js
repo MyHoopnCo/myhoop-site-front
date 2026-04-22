@@ -1,5 +1,3 @@
-import emailjs from "emailjs-com";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("ctaContact");
   const button = form.querySelector("button");
