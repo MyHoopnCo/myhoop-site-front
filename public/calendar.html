@@ -26,9 +26,27 @@
         <a href="calendar.html">Calendar</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="nav-right"></div>
+      <div class="nav-right"><div class="nav-right">
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <!-- Slide Menu -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileClose">✕</button>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="calendar.html">Schedule</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
 
   <!-- HERO -->
   <section class="cal-hero">
@@ -255,6 +273,27 @@
  
   renderCal(); renderUpcoming();
 
+  // NAV : HAMBURGER
+  const hamburger    = document.getElementById("hamburger");
+  const mobileMenu   = document.getElementById("mobileMenu");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+  const mobileClose  = document.getElementById("mobileClose");
+
+  function openMenu(){
+    mobileMenu.classList.add("open");
+    mobileOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu(){
+    mobileMenu.classList.remove("open");
+    mobileOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  hamburger.addEventListener("click", openMenu);
+  mobileClose.addEventListener("click", closeMenu);
+  mobileOverlay.addEventListener("click", closeMenu);
   </script>
 
 </body>

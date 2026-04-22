@@ -64,6 +64,102 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
   display: block;
 }
 
+/* ── NAV : HAMBURGER BUTTON ────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ── NAV : MOBILE MENU ─────────────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  left: auto;
+  width: 75%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--white);
+  z-index: 200;
+  padding: 2rem 2rem;
+  transition: left 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--black);
+  margin-bottom: 2.5rem;
+  padding: 4px;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-nav a {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav a::after {
+  content: "›";
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.mobile-nav a:hover { color: var(--orange); }
+
+/* OVERLAY  */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 199;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.mobile-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
   position: relative;
@@ -900,6 +996,10 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
 
   .month-block   { margin-bottom: 0; }
   .left-controls { margin-top: 0; padding-top: 0.25rem; }
+
+  /* Hide nav center and show hamburger under 900px */
+  .nav-center  { display: none; }
+  .hamburger   { display: flex; }
 
 }
 
