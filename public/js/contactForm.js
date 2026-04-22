@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       await emailjs.sendForm(
         "service_wgjhcpq",  
-        "PUT_TEMPLATE_ID_HERE", // <<<<<<<<<<< Bryan this line  
+        "template_f5hkp87", 
         form,
         "BvRPgNERoAaK1nVrK"    
       );
