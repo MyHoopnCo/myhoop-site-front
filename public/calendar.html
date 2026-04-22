@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>MyHoop,Inc</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Logo_NoWords.png">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="index.html" class="brand">
+          <img src="images/Logo_NoWords.png" alt="MyHoop,Inc Logo" class="logo">
+        </a>
+      </div>
+      <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-right"></div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cal-hero">
+    <h1>EVENTS & SCHEDULE</h1>
+    <p>Leagues, tournaments, pickup runs — all in one place.</p>
+  </section>
+ 
+  <!-- CALENDAR -->
+  <section class="cal-body">
+    <div class="cal-container">
+ 
+      <!-- LEFT -->
+      <div class="cal-left">
+        <!-- This wrapper splits into 2-col on mobile -->
+        <div class="cal-left-inner">
+ 
+          <!-- Month title + arrows -->
+          <div class="month-block">
+            <span class="month-name" id="monthName">APRIL</span>
+            <span class="month-year" id="yearName">2026</span>
+            <div class="month-arrows">
+              <button class="month-arr" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="month-arr" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+ 
+          <!-- City toggle + Legend -->
+          <div class="left-controls">
+            <div class="section-pill">CITY</div>
+            <div class="city-toggle">
+              <button class="city-btn active" data-city="edmonton">Edmonton</button>
+              <button class="city-btn" data-city="calgary">Calgary</button>
+            </div>
+ 
+            <span class="legend-lbl">LEGEND</span>
+            <div class="legend-pills">
+              <span class="legend-pill pill-league">League</span>
+              <span class="legend-pill pill-tourney">Tournament</span>
+              <span class="legend-pill pill-pickup">Pickup</span>
+              <span class="legend-pill pill-allstar">All-Star</span>
+            </div>
+          </div>
+ 
+        </div>
+      </div>
+ 
+      <!-- RIGHT -->
+      <div class="cal-right">
+        <div class="cal-day-row">
+          <div class="cal-day-pill">Sun</div>
+          <div class="cal-day-pill">Mon</div>
+          <div class="cal-day-pill">Tue</div>
+          <div class="cal-day-pill">Wed</div>
+          <div class="cal-day-pill">Thu</div>
+          <div class="cal-day-pill">Fri</div>
+          <div class="cal-day-pill">Sat</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+ 
+    </div>
+  </section>
+ 
+  <!-- UPCOMING EVENTS -->
+  <section class="upcoming-section">
+    <div class="upcoming-inner">
+      <h2 class="upcoming-title">UPCOMING EVENTS</h2>
+      <p class="upcoming-sub" id="upcomingCity">Edmonton, AB</p>
+      <div id="upcomingList"></div>
+    </div>
+  </section>
+ 
+  <!-- PARTNER CALLOUT -->
+  <section class="partner-callout">
+    <h2>GOT A LEAGUE OR TOURNAMENT?</h2>
+    <p>Partner with MyHoop and get your schedule in front of every hooper in Alberta. Free exposure. Real reach.</p>
+    <a href="contact.html">Get Your Events Listed</a>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <!-- Left -->
+      <div class="footer-brand">
+        <p class="tagline">For the culture</p>
+        <p class="copyright">© 2026 MyHoop, Inc All rights reserved.</p>
+      </div>
+      <!-- Middle -->
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <!-- Right -->
+      <div class="footer-social">
+        <span class="location">Edmonton, AB</span>
+
+          <a href="https://www.instagram.com/myhoophq" target="_blank" aria-label="Instagram" rel="noopener">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="ev-overlay" id="evOverlay">
+    <div class="ev-modal">
+      <button class="ev-modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+      <span class="modal-type-pill" id="modalPill"></span>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-meta" id="modalMeta"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <p class="modal-contact" id="modalContact"></p>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script src="js/subscribe.js"></script>
+  <script>
+    // EVENTS
+    const EVENTS = [
+    { id:1, city:"calgary", type:"allstar", title:"All-Star Showcase",   date:"2026-06-13", time:"2:00 PM",  location:"Terwillegar Community Recreation Centre", desc:"Four sponsored teams, one night. The best hoopers in Edmonton go head-to-head.", contact:"Presented by MyHoop × Eros" },
+  ];
+ 
+  const TYPE_COLORS = { league:"#E5A623", tourney:"#C75B2A", pickup:"#2F6F5E", allstar:"#555" };
+  const TYPE_LABELS = { league:"League", tourney:"Tournament", pickup:"Pickup / Open Gym", allstar:"All-Star / Special" };
+  const MONTHS = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+ 
+  const today = new Date();
+  let currentCity="edmonton", currentYear=today.getFullYear(), currentMonth=today.getMonth();
+ 
+  function pad(n){ return String(n).padStart(2,"0"); }
+ 
+  function eventsForDate(ds){
+    return EVENTS.filter(e=>e.date===ds&&(e.city===currentCity||e.city==="both"));
+  }
+ 
+  function upcomingEvents(){
+    const today=new Date(); today.setHours(0,0,0,0);
+    return EVENTS
+      .filter(e=>{ const d=new Date(e.date+"T00:00:00"); return d>=today&&(e.city===currentCity||e.city==="both"); })
+      .sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,8);
+  }
+ 
+  function renderCal(){
+    document.getElementById("monthName").textContent=MONTHS[currentMonth];
+    document.getElementById("yearName").textContent=currentYear;
+    const grid=document.getElementById("calGrid");
+    const first=new Date(currentYear,currentMonth,1).getDay();
+    const dim=new Date(currentYear,currentMonth+1,0).getDate();
+    const dprev=new Date(currentYear,currentMonth,0).getDate();
+    const today=new Date();
+    grid.innerHTML="";
+    const total=Math.ceil((first+dim)/7)*7;
+    for(let i=0;i<total;i++){
+      if(i>0&&i%7===0){ const sep=document.createElement("div"); sep.className="cal-week-sep"; grid.appendChild(sep); }
+      let day,dateObj,other=false;
+      if(i<first){          day=dprev-first+i+1;  dateObj=new Date(currentYear,currentMonth-1,day); other=true; }
+      else if(i>=first+dim){ day=i-first-dim+1;   dateObj=new Date(currentYear,currentMonth+1,day); other=true; }
+      else{                  day=i-first+1;        dateObj=new Date(currentYear,currentMonth,day); }
+      const ds=`${dateObj.getFullYear()}-${pad(dateObj.getMonth()+1)}-${pad(dateObj.getDate())}`;
+      const evs=other?[]:eventsForDate(ds);
+      const isToday=!other&&dateObj.getFullYear()===today.getFullYear()&&dateObj.getMonth()===today.getMonth()&&dateObj.getDate()===today.getDate();
+      const cell=document.createElement("div"); cell.className="cal-cell";
+      const circ=document.createElement("div"); circ.className="cal-date-circle"; circ.textContent=day;
+      if(other)          circ.classList.add("c-other");
+      else if(evs.length){ circ.classList.add(`c-${evs[0].type}`,"clickable"); circ.addEventListener("click",()=>openModal(evs[0])); }
+      else if(isToday)   circ.classList.add("c-today");
+      else               circ.classList.add("c-default");
+      cell.appendChild(circ);
+      if(evs.length){
+        const lbl=document.createElement("div"); lbl.className="cal-ev-lbl";
+        lbl.textContent=evs.length===1?TYPE_LABELS[evs[0].type]:`${evs.length} Events`;
+        lbl.addEventListener("click",()=>openModal(evs[0]));
+        cell.appendChild(lbl);
+      }
+      grid.appendChild(cell);
+    }
+  }
+ 
+  function renderUpcoming(){
+    const list=document.getElementById("upcomingList");
+    document.getElementById("upcomingCity").textContent=currentCity==="edmonton"?"Edmonton, AB":"Calgary, AB";
+    const evs=upcomingEvents(); list.innerHTML="";
+    if(!evs.length){ list.innerHTML=`<div style="padding:2rem 0;font-family:var(--font-body);color:#888;font-size:0.9rem;">No upcoming events — check back soon.</div>`; return; }
+    evs.forEach(ev=>{
+      const d=new Date(ev.date+"T00:00:00");
+      const row=document.createElement("div"); row.className="ev-row";
+      row.innerHTML=`
+        <div><div class="ev-day-num">${d.getDate()}</div><div class="ev-day-mon">${d.toLocaleString("en-CA",{month:"short"}).toUpperCase()}</div></div>
+        <div class="ev-row-info"><h4>${ev.title}</h4><p>${ev.time} — ${ev.location}</p></div>
+        <span class="ev-badge ${ev.type}">${TYPE_LABELS[ev.type]}</span>`;
+      row.addEventListener("click",()=>openModal(ev));
+      list.appendChild(row);
+    });
+  }
+ 
+  function openModal(ev){
+    const d=new Date(ev.date+"T00:00:00");
+    const fmt=d.toLocaleDateString("en-CA",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+    const pill=document.getElementById("modalPill");
+    pill.textContent=TYPE_LABELS[ev.type]; pill.style.background=TYPE_COLORS[ev.type];
+    document.getElementById("modalTitle").textContent=ev.title;
+    document.getElementById("modalMeta").textContent=`${fmt} · ${ev.time} · ${ev.location}`;
+    document.getElementById("modalDesc").textContent=ev.desc;
+    document.getElementById("modalContact").textContent=ev.contact;
+    document.getElementById("evOverlay").classList.add("open");
+  }
+ 
+  document.getElementById("modalClose").addEventListener("click",()=>document.getElementById("evOverlay").classList.remove("open"));
+  document.getElementById("evOverlay").addEventListener("click",e=>{ if(e.target===document.getElementById("evOverlay")) document.getElementById("evOverlay").classList.remove("open"); });
+  document.getElementById("prevMonth").addEventListener("click",()=>{ currentMonth--; if(currentMonth<0){currentMonth=11;currentYear--;} renderCal(); });
+  document.getElementById("nextMonth").addEventListener("click",()=>{ currentMonth++; if(currentMonth>11){currentMonth=0;currentYear++;} renderCal(); });
+  document.querySelectorAll(".city-btn").forEach(btn=>btn.addEventListener("click",()=>{
+    currentCity=btn.dataset.city;
+    document.querySelectorAll(".city-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    renderCal(); renderUpcoming();
+  }));
+ 
+  renderCal(); renderUpcoming();
+
+  </script>
+
+</body>
+</html>
