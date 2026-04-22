@@ -21,7 +21,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
   position: absolute;
   top: 0; left: 0;
   z-index: 50;
-  background: rgba(255,255,255,0.70);
+  background: rgba(70, 2, 49, 0.7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
@@ -48,7 +48,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
 
 .nav-center a {
   text-decoration: none;
-  color: var(--black);
+  color: var(--white);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
@@ -658,7 +658,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
   font-family: var(--font-display);
   font-size: 1.2rem;
   letter-spacing: 2px;
-  background: var(--orange);
+  background: rgba(70, 2, 49, 0.7);
   color: var(--white);
   border: none;
   border-radius: 6px;
@@ -738,7 +738,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
   font-family: var(--font-display);
   font-size: 1.2rem;
   letter-spacing: 2px;
-  background: var(--orange);
+  background: rgba(70, 2, 49, 0.7);;
   color: var(--white);
   border: none;
   border-radius: 6px;
