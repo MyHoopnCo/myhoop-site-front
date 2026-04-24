@@ -600,7 +600,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
 .ev-badge.allstar { background: #555; }
 
 /* PARTNER */
-.partner-callout   { background: #111; padding: 5rem 2rem; text-align: center; }
+.partner-callout   { background: var(--indigo); padding: 5rem 2rem; text-align: center; }
 .partner-callout h2 { font-family: var(--font-display); font-size: clamp(2.2rem,4vw,3.5rem); letter-spacing: 3px; color: #fff; margin-bottom: 0.75rem; }
 .partner-callout p  { font-family: var(--font-body); font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
 .partner-callout a  { display: inline-block; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; padding: 13px 36px; background: #ff6a00; color: #fff; text-decoration: none; border-radius: 999px; transition: opacity 0.2s; }
@@ -930,7 +930,7 @@ body { font-family: var(--font-body); line-height: 1.6; color: var(--black); bac
 
 .footer-nav a {
   font-family: var(--font-body);
-  color: #2b2b2b;
+  color: var(--white);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
