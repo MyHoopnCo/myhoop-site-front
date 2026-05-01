@@ -208,6 +208,7 @@
     </div>
   </footer>
 
+  <script src="js/nav_ham.js"></script>
   <script src="js/subscribe.js"></script>
   <script>
     const reveals = document.querySelectorAll('.reveal');
@@ -221,27 +222,6 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    // HAMBURGER
-    const hamburger    = document.getElementById("hamburger");
-    const mobileMenu   = document.getElementById("mobileMenu");
-    const mobileOverlay = document.getElementById("mobileOverlay");
-    const mobileClose  = document.getElementById("mobileClose");
-
-    function openMenu(){
-      mobileMenu.classList.add("open");
-      mobileOverlay.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeMenu(){
-      mobileMenu.classList.remove("open");
-      mobileOverlay.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-
-    hamburger.addEventListener("click", openMenu);
-    mobileClose.addEventListener("click", closeMenu);
-    mobileOverlay.addEventListener("click", closeMenu);
   </script>
 
 </body>
