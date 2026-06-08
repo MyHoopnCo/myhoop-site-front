@@ -12,46 +12,10 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <a href="index.html" class="brand">
-          <img src="images/Logo_NoWords.png" alt="MyHoop&Co Logo" class="logo">
-        </a>
-      </div>
-
-      <div class="nav-center">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="contact.html">Contact</a>
-      </div>
-
-      <div class="nav-right"><div class="nav-right">
-        <button class="hamburger" id="hamburger" aria-label="Open menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Slide Menu -->
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileClose">✕</button>
-    <nav class="mobile-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-
+  <div id="navbar-container"></div>
 
   <header class="hero">
-    <img src="images/Contact.JPG" alt="Hero Image" class="hero-img">
+    <img src="images/contact/Contact.JPG" alt="Hero Image" class="hero-img">
     <div class="hero-content">
       <h1>Contact & Partnerships</h1>
     </div>
@@ -86,38 +50,10 @@
   </div>
 </section>
   
+  <div id="footer-container"></div>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-    
-      <!-- Left -->
-      <div class="footer-brand">
-        <p class="tagline">For the culture</p>
-        <p class="copyright">© 2026 Myhoop, Inc All rights reserved.</p>
-      </div>
-
-      <!-- Middle -->
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <!-- Right -->
-      <div class="footer-social">
-        <span class="location">Edmonton, AB</span>
-
-          <a href="https://www.instagram.com/myhoophq" target="_blank" aria-label="Instagram" rel="noopener">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </footer>
-
-  <script src="js/nav_ham.js"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/components/navbar.js"></script>
   <script src="js/subscribe.js"></script>
   <script src="js/contactForm.js"></script>
   

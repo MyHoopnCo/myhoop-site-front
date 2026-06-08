@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
   <title>Myhoop. Run it back</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/Logo_NoWords.png">
@@ -13,46 +12,13 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <a href="index.html" class="brand">
-          <img src="images/Logo_NoWords.png" alt="MyHoop,Inc Logo" class="logo">
-        </a>
-      </div>
-      <div class="nav-center">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="nav-right">
-        <button class="hamburger" id="hamburger" aria-label="Open menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Slide Menu -->
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileClose">✕</button>
-    <nav class="mobile-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+  <div id="navbar-container"></div>
 
   <!-- HERO -->
   <header class="hero">
-    <img src="images/hero_img.jpg" alt="Hero Image" class="hero-img">
+    <img src="images/index/hero_img.jpg" alt="Hero Image" class="hero-img">
     <div class="hero-content">
-      <img src="images/Logo_Words.png" alt="MyHoop Logo" class="hero-logo">
+      <img src="images/global/Logo_Words.png" alt="MyHoop Logo" class="hero-logo">
       <h1>Exposure starts here</h1>
       <p>The Northruns. Run it back.</p>
     </div>
@@ -142,73 +108,33 @@
       </div>
       <div class="photo-grid">
         <div class="photo-slot">
-          <img src="images/home1.JPG" alt="Community run" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
+          <img src="images/index/home1.JPG" alt="Community run" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
         </div>
         <div class="photo-slot">
-          <img src="images/home2.jpg" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
+          <img src="images/index/home2.jpg" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
         </div>
         <div class="photo-slot">
-          <img src="images/home3.JPG" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
+          <img src="images/index/home3.JPG" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
         </div>
         <div class="photo-slot">
-          <img src="images/home4.JPG" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
+          <img src="images/index/home4.JPG" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
         </div>
         <div class="photo-slot">
-          <img src="images/home5.jpg" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
+          <img src="images/index/home5.jpg" alt="Community" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><i class=\'fa-solid fa-basketball\'></i></div>'">
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta">
-    <h2>Stay Connected</h2>
-    <p>Get updates on events, drops, and community runs.</p>
-
-    <form id="ctaSubscribe" class="cta-form">
-      <input 
-        id="email"
-        type="email" 
-        placeholder="Enter your email" 
-        required
-      >
-      <button type="submit">Join the Community</button>
-    </form>
-
-    <div id="subConfirmation" class="sub-confirmation"></div>
-
-    <span class="cta-note">No spam. Just basketball news.</span>
-  </section>
+  <div id="cta-container"></div>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-content">
-      <!-- Left -->
-      <div class="footer-brand">
-        <p class="tagline">For the culture</p>
-        <p class="copyright">© 2026 Myhoop, Inc All rights reserved.</p>
-      </div>
-      <!-- Middle -->
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <!-- Right -->
-      <div class="footer-social">
-        <span class="location">Edmonton, AB</span>
+  <div id="footer-container"></div>
 
-          <a href="https://www.instagram.com/myhoophq" target="_blank" aria-label="Instagram" rel="noopener">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </footer>
-
-  <script src="js/nav_ham.js"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/cta.js"></script>
   <script src="js/subscribe.js"></script>
   <script>
     const reveals = document.querySelectorAll('.reveal');
