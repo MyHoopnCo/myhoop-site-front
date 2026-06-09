@@ -1,0 +1,59 @@
+/* ── CTA ─────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS / CTA.CSS
+   Note: .cta-note and .sub-confirmation are used directly
+   in contact.html without this component → lives in
+   pages/contact.css, not here.
+   ═══════════════════════════════════════════════════════════ */
+
+   .cta {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 5rem 2rem;
+  }
+  
+  .cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    letter-spacing: 3px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .cta p {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    opacity: 0.75;
+  }
+  
+  .cta-form {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .cta-form input {
+    padding: 14px 18px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    min-width: 260px;
+    font-family: var(--font-body);
+  }
+  
+  .cta-form button {
+    padding: 14px 28px;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  
+  .cta-form button:hover { opacity: 0.9; }

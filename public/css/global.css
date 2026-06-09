@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL.CSS
+   Fonts are loaded via <link> in each HTML <head>.
+   No @import here — <link> is faster than CSS @import.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── BRAND VARIABLES ─────────────────────────────────────── */
+:root {
+  --orange:      #ff6a00;
+  --black:       #111111;
+  --dark:        #383838;
+  --white:       #ffffff;
+  --light:       #f5f5f5;
+  --gray:        #555555;
+  --chalk:       #F5F5F0;
+  --burgundy:    rgba(70, 2, 49, 0.85);
+  --green:       #1DB954;
+  --green-dark:  #1a4d26;
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'Barlow', system-ui, sans-serif;
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── BASE ────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--black);
+  background: var(--chalk);
+  overflow-x: hidden;
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,0 +1,86 @@
+/* ── CONTACT FORMS ───────────────────────────────────────── */
+.full-page-cta {
+    background: var(--gray);
+    color: var(--white);
+    padding: 150px 20px;
+    margin-top: -70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+   
+  .dual-form-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 60px;
+  }
+   
+  .form-side { flex: 1; }
+   
+  .form-side h2 {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+   
+  .form-side p {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    opacity: 0.75;
+  }
+   
+  .vertical-cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+   
+  .vertical-cta-form input,
+  .vertical-cta-form textarea {
+    padding: 14px 18px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    width: 100%;
+    font-family: var(--font-body);
+  }
+   
+  .vertical-cta-form button {
+    padding: 14px 28px;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+   
+  .vertical-cta-form button:hover { opacity: 0.9; }
+   
+  /* Used directly on this page (not via cta.js component) */
+  .cta-note {
+    display: block;
+    margin-top: 1.2rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+   
+  .sub-confirmation {
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+  }
+   
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .dual-form-wrapper { flex-direction: column; }
+  }
+  

@@ -1,0 +1,318 @@
+/* ── HERO LOGO (index only) ──────────────────────────────── */
+.hero-logo {
+    width: 300px;
+    height: auto;
+    filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35));
+  }
+   
+  /* ── DESCRIPTION ─────────────────────────────────────────── */
+  .description {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 2px;
+    color: var(--black);
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    line-height: 1.1;
+  }
+   
+  /* ── MISSION STATEMENT ───────────────────────────────────── */
+  .mission {
+    padding: 6rem 2rem;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+   
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: var(--orange);
+    opacity: 0.05;
+  }
+   
+  .mission-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+   
+  .mission-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 2rem;
+    display: block;
+  }
+   
+  .mission-quote {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+   
+  .mission-quote span { color: var(--orange); }
+   
+  .mission-bar {
+    width: 60px;
+    height: 4px;
+    background: var(--orange);
+    margin: 0 auto 2rem;
+  }
+   
+  .mission-body {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+   
+  /* ── STATS BAR ───────────────────────────────────────────── */
+  .stats {
+    background: var(--orange);
+    padding: 3.5rem 2rem;
+  }
+   
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 1rem;
+  }
+   
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+  }
+   
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%; bottom: 20%;
+    width: 1px;
+    background: rgba(255,255,255,0.3);
+  }
+   
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+   
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
+   
+  /* ── WHY MYHOOP ──────────────────────────────────────────── */
+  .why {
+    padding: 5rem 2rem;
+    background: var(--chalk);
+  }
+   
+  .why-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+   
+  .section-header { margin-bottom: 3rem; }
+   
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+   
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 3px;
+    color: var(--black);
+    line-height: 1;
+  }
+   
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 2px solid var(--black);
+  }
+   
+  .why-card {
+    padding: 2.5rem 2rem;
+    border-right: 2px solid var(--black);
+    position: relative;
+    transition: background 0.25s ease;
+  }
+   
+  .why-card:last-child { border-right: none; }
+   
+  /* Bug fix: var(--indigo) was undefined — replaced with var(--burgundy) */
+  .why-card:hover { background: var(--burgundy); }
+   
+  .why-card:hover .why-card-title,
+  .why-card:hover .why-card-body { color: var(--white); }
+  .why-card:hover .why-icon      { color: var(--orange); }
+  .why-card:hover .why-number    { color: rgba(255,255,255,0.06); }
+   
+  .why-number {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: rgba(0,0,0,0.05);
+    line-height: 1;
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    letter-spacing: 2px;
+    transition: color 0.25s ease;
+    user-select: none;
+  }
+   
+  .why-icon {
+    font-size: 1.4rem;
+    color: var(--orange);
+    margin-bottom: 1.2rem;
+    display: block;
+    transition: color 0.25s ease;
+  }
+   
+  .why-card-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+    transition: color 0.25s ease;
+  }
+   
+  .why-card-body {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.7;
+    transition: color 0.25s ease;
+  }
+   
+  /* ── COMMUNITY PHOTOS ────────────────────────────────────── */
+  .community {
+    padding: 5rem 2rem;
+    background: var(--white);
+  }
+   
+  .community-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+   
+  .community-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+   
+  .community-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    color: var(--black);
+  }
+   
+  .community-tagline span { color: var(--orange); }
+   
+  .community-sub {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 500;
+  }
+   
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+   
+  .photo-slot {
+    background: #ddd;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+   
+  .photo-slot:first-child {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+   
+  .photo-slot img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+   
+  .photo-slot:hover img { transform: scale(1.04); }
+   
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #222 0%, #333 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+   
+  .photo-placeholder i {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.15);
+  }
+   
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2)::after { display: none; }
+   
+    .why-grid { grid-template-columns: 1fr; }
+    .why-card { border-right: none; border-bottom: 2px solid var(--black); }
+    .why-card:last-child { border-bottom: none; }
+   
+    .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .photo-slot:first-child { grid-column: span 2; }
+  }
+   
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+   
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-slot:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+  }
+  
