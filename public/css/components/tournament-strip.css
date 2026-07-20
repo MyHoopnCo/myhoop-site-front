@@ -1,0 +1,144 @@
+/* ── CALENDAR ────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   Horizontal-scroll upcoming tournament strip, below the hero.
+   Used on: entertainment.html
+   ═══════════════════════════════════════════════════════════ */
+
+   .tournament-strip {
+    background: var(--black);
+    padding: 2.5rem 0 3rem;
+  }
+  
+  .tournament-strip .section-head {
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  .tournament-strip .section-head h2,
+  .tournament-strip .section-eyebrow {
+    color: var(--white);
+  }
+  
+  .strip-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 2rem 0.5rem;
+    scrollbar-width: none;
+  }
+  
+  .strip-scroll::-webkit-scrollbar { display: none; }
+  
+  .tournament-card {
+    scroll-snap-align: start;
+    flex: 0 0 260px;
+    background: var(--dark);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tournament-banner {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    background: var(--gray);
+  }
+  
+  .tournament-body {
+    padding: 1rem 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .tournament-date {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  
+  .tournament-name {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    line-height: 1.05;
+  }
+  
+  .tournament-meta {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+  }
+  
+  .tournament-spots {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .participate-btn {
+    margin-top: 6px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  
+  .participate-btn:hover { opacity: 0.9; }
+  
+  .participate-btn[disabled] {
+    background: var(--gray);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /* ── SCROLL ARROWS ───────────────────────────────────────── */
+  .strip-nav {
+    display: flex;
+    gap: 8px;
+    max-width: 1200px;
+    margin: 0.75rem auto 0;
+    padding: 0 2rem;
+  }
+  
+  .strip-arrow {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .strip-arrow:hover { border-color: var(--orange); color: var(--orange); }
+  
+  @media (max-width: 600px) {
+    .tournament-strip .section-head,
+    .strip-scroll,
+    .strip-nav { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .tournament-card { flex-basis: 220px; }
+  }

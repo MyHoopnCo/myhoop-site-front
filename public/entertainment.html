@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/global.css" />
+
+  <link rel="stylesheet" href="css/components/navbar.css" />
+  <link rel="stylesheet" href="css/components/nav-auth.css" />
+  <link rel="stylesheet" href="css/components/hero.css" />
+  <link rel="stylesheet" href="css/components/tournament-strip.css" />
+  <link rel="stylesheet" href="css/components/registration.css" />
+  <link rel="stylesheet" href="css/components/highlights.css" />
+  <link rel="stylesheet" href="css/components/players.css" />
+  <link rel="stylesheet" href="css/components/leaderboard.css" />
+  <link rel="stylesheet" href="css/components/partners.css" />
+  <link rel="stylesheet" href="css/components/cta.css" />
+  <link rel="stylesheet" href="css/components/signup.css" />
+  <link rel="stylesheet" href="css/components/footer.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="hero-img" src="images/index/hero_img.jpg" alt="" />
+    <div class="hero-content">
+    </div>
+  </header>
+
+  <!-- TOURNAMENT STRIP -->
+  <section class="tournament-strip" id="tournament-strip">
+    <div class="section-head">
+      <span class="section-eyebrow">Upcoming</span>
+      <h2>Tournaments</h2>
+    </div>
+    <div class="strip-scroll" id="strip-scroll"></div>
+    <div class="strip-nav">
+      <button class="strip-arrow" id="strip-prev" aria-label="Scroll left">‹</button>
+      <button class="strip-arrow" id="strip-next" aria-label="Scroll right">›</button>
+    </div>
+  </section>
+
+  <!-- Registration modal -->
+  <div class="reg-overlay" id="reg-overlay">
+    <div class="reg-box" id="reg-box"></div>
+  </div>
+
+  <!-- ── HIGHLIGHT REEL ──────────────────────────────────── -->
+  <section class="highlights" id="highlights">
+    <div class="section-head">
+      <span class="section-eyebrow">Highlight Reel</span>
+      <h2>Watch The Runs</h2>
+    </div>
+
+    <div class="filter-bar" id="highlight-filters">
+      <button class="filter-btn active" data-type="all">All</button>
+      <button class="filter-btn" data-type="1v1">1v1</button>
+      <button class="filter-btn" data-type="3v3">3v3</button>
+      <button class="filter-btn" data-type="5v5">5v5</button>
+    </div>
+
+    <div class="highlight-grid" id="highlight-grid"></div>
+
+    <button class="load-more-btn" id="highlight-load-more" aria-label="Load more highlights">↓</button>
+  </section>
+
+  <!-- Theater mode playback -->
+  <div class="theater-overlay" id="theater-overlay">
+    <div class="theater-box">
+      <div class="theater-frame-wrap" id="theater-frame-wrap"></div>
+      <div class="theater-info">
+        <h3 id="theater-title"></h3>
+        <button class="theater-close" id="theater-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TALENT DISCOVERY ────────────────────────────────── -->
+  <section class="talent" id="talent">
+    <div class="section-head">
+      <span class="section-eyebrow">Talent Discovery</span>
+      <h2>Who's Playing</h2>
+    </div>
+
+    <div class="talent-toolbar">
+      <input
+        class="talent-search"
+        id="talent-search"
+        type="text"
+        placeholder="Search by name, city, or position"
+      />
+    </div>
+
+    <div class="player-grid" id="player-grid"></div>
+  </section>
+
+  <!-- ── TOP PERFORMERS ──────────────────────────────────── -->
+  <section class="leaderboard" id="leaderboard">
+    <div class="section-head">
+      <span class="section-eyebrow">Top Performers</span>
+      <h2>Leaderboard</h2>
+    </div>
+
+    <div class="leaderboard-tabs" id="leaderboard-tabs">
+      <button class="filter-btn" data-type="1v1">1v1</button>
+      <button class="filter-btn" data-type="3v3">3v3</button>
+      <button class="filter-btn active" data-type="5v5">5v5</button>
+    </div>
+
+    <div class="leaderboard-list" id="leaderboard-list"></div>
+  </section>
+
+  <!-- ── PARTNERS ────────────────────────────────────────── -->
+  <section class="partners" id="partners">
+    <div class="section-head">
+      <span class="section-eyebrow">Backed By</span>
+      <h2>Partners</h2>
+    </div>
+    <div class="partner-grid" id="partner-grid"></div>
+  </section>
+
+  <!-- SIGNUP's --> 
+  <div id="signup-container"></div>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- Plain scripts: inject markup into the containers above -->
+  <script type="module" src="js/components/navbar.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+
+  <!-- Module scripts: data-driven sections, all reading from data/mock-data.js -->
+  <script type="module" src="js/components/nav-auth.js"></script>
+  <script type="module" src="js/components/registration.js"></script>
+  <script type="module" src="js/components/tournament-strip.js"></script>
+  <script type="module" src="js/components/highlights.js"></script>
+  <script type="module" src="js/components/players.js"></script>
+  <script type="module" src="js/components/leaderboard.js"></script>
+  <script type="module" src="js/components/partners.js"></script>
+  <script type="module" src="js/components/signup.js"></script>
+  <script type="module" src="js/components/reveal.js"></script>
+</body>
+</html>

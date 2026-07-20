@@ -11,11 +11,13 @@ const navbarHTML = `
       <div class="nav-center">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="entertainment.html">The Hub</a>
         <a href="calendar.html">Calendar</a>
         <a href="contact.html">Contact</a>
       </div>
 
       <div class="nav-right">
+        <div class="nav-auth" id="navAuth"></div>
         <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span>
           <span></span>
@@ -32,8 +34,10 @@ const navbarHTML = `
     <nav class="mobile-nav">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
+      <a href="entertainment.html">The Hub</a>
       <a href="calendar.html">Calendar</a>
       <a href="contact.html">Contact</a>
+      <div id="navAuthMobile"></div>
     </nav>
   </div>
 `;

@@ -1,0 +1,177 @@
+/* ── REGISTRATION ────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS / REGISTRATION.CSS
+   Modal form triggered by the "Participate" button on calendar.js
+   Used on: entertainment.html
+   ═══════════════════════════════════════════════════════════ */
+
+   .reg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 300;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 3rem 1.5rem;
+  }
+  
+  .reg-overlay.open { display: flex; }
+  
+  .reg-box {
+    width: min(560px, 100%);
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem 2rem 2.25rem;
+  }
+  
+  .reg-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+  .reg-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+  }
+  
+  .reg-head p {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  
+  .reg-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: var(--black);
+  }
+  
+  .reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  
+  .reg-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  
+  .reg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .reg-field label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+  
+  .reg-field .hint {
+    font-weight: 500;
+    color: var(--gray);
+    font-size: 0.72rem;
+  }
+  
+  .reg-field input,
+  .reg-field textarea {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    padding: 10px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    background: var(--chalk);
+  }
+  
+  .reg-field input:focus,
+  .reg-field textarea:focus {
+    outline: none;
+    border-color: var(--orange);
+  }
+  
+  .reg-field textarea {
+    min-height: 72px;
+    resize: vertical;
+  }
+  
+  .reg-fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .reg-fieldset legend {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    padding: 0;
+  }
+  
+  .reg-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+  
+  .reg-check input { margin-top: 3px; }
+  
+  .reg-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .reg-radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+  
+  .reg-submit {
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 1.5px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    cursor: pointer;
+  }
+  
+  .reg-submit:hover { opacity: 0.9; }
+  .reg-submit[disabled] { opacity: 0.5; cursor: not-allowed; }
+  
+  .reg-status {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    min-height: 1.2em;
+  }
+  
+  .reg-status[data-state="success"] { color: var(--green-dark); }
+  .reg-status[data-state="error"]   { color: #b3261e; }
+  
+  @media (max-width: 600px) {
+    .reg-box { padding: 1.5rem 1.25rem 1.75rem; }
+    .reg-row { grid-template-columns: 1fr; }
+  }

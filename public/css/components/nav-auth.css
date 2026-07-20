@@ -1,0 +1,65 @@
+/* ── NAV AUTH ────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS / NAV-AUTH.CSS
+   Extends navbar.css with the signed-out / signed-in states.
+   Kept separate since navbar.css is a shared file used by
+   pages that may not need auth controls.
+   ═══════════════════════════════════════════════════════════ */
+
+   .nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .nav-auth a.nav-signin {
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .nav-auth a.nav-signin:hover { color: var(--orange); }
+  
+  .nav-auth a.nav-signup {
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--white);
+    background: var(--orange);
+    padding: 9px 18px;
+    border-radius: 6px;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-auth a.nav-signup:hover { opacity: 0.9; }
+  
+  .nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+  
+  .nav-profile .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+  }
+  
+  @media (max-width: 900px) {
+    .nav-auth { display: none; }
+  }

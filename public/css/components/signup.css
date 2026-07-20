@@ -1,0 +1,17 @@
+/* ── SIGNUP STATUS ───────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS / SIGNUP.CSS
+   Extends .cta (cta.css) with a status line under the form.
+   Kept out of cta.css since contact.html's CTA doesn't need it.
+   ═══════════════════════════════════════════════════════════ */
+
+   .signup-status {
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+  
+  .signup-status[data-state="success"] { color: var(--green); }
+  .signup-status[data-state="error"]   { color: #ff8a8a; }
+  .signup-status[data-state="pending"] { color: rgba(255,255,255,0.7); }
