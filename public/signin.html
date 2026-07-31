@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myhoop. Sign In</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components/navbar.css" />
+  <link rel="stylesheet" href="css/components/nav-auth.css" />
+  <link rel="stylesheet" href="css/components/footer.css" />
+  <link rel="stylesheet" href="css/pages/auth.css" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/global/Logo_NoWords.png">
+</head>
+
+<body>
+
+  <div id="navbar-container"></div>
+
+  <section class="auth-section">
+    <div class="auth-wrapper">
+      <h2>Sign In</h2>
+      <p class="auth-sub">Access your profile, register for tournaments, and track your stats.</p>
+
+      <form class="auth-form" id="signin-form">
+        <div class="auth-field">
+          <label for="signin-email">Email</label>
+          <input id="signin-email" name="email" type="email" required autocomplete="email" />
+        </div>
+
+        <div class="auth-field">
+          <label for="signin-password">Password</label>
+          <input id="signin-password" name="password" type="password" required autocomplete="current-password" />
+        </div>
+
+        <button type="submit">Sign In</button>
+        <p class="auth-status" id="signin-status"></p>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a id="auth-switch-link" href="signup.html">Sign up</a></p>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script type="module" src="js/components/navbar.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+  <script type="module" src="js/components/nav-auth.js"></script>
+  <script type="module" src="js/signin.js"></script>
+
+</body>
+</html>

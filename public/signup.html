@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myhoop. Sign Up</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components/navbar.css" />
+  <link rel="stylesheet" href="css/components/nav-auth.css" />
+  <link rel="stylesheet" href="css/components/footer.css" />
+  <link rel="stylesheet" href="css/pages/auth.css" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/global/Logo_NoWords.png">
+</head>
+
+<body>
+
+  <div id="navbar-container"></div>
+
+  <section class="auth-section">
+    <div class="auth-wrapper">
+      <h2>Sign Up</h2>
+      <p class="auth-sub">Create your player profile to register for tournaments and get on the leaderboard.</p>
+
+      <form class="auth-form" id="signup-form">
+        <div class="auth-row">
+          <div class="auth-field">
+            <label for="signup-first-name">First name</label>
+            <input id="signup-first-name" name="first_name" type="text" required autocomplete="given-name" />
+          </div>
+          <div class="auth-field">
+            <label for="signup-last-name">Last name</label>
+            <input id="signup-last-name" name="last_name" type="text" required autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-email">Email</label>
+          <input id="signup-email" name="email" type="email" required autocomplete="email" />
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-password">Password</label>
+          <input id="signup-password" name="password" type="password" required minlength="8" autocomplete="new-password" />
+        </div>
+
+        <div class="auth-row">
+          <div class="auth-field">
+            <label for="signup-age">Age</label>
+            <input id="signup-age" name="age" type="number" min="5" max="100" />
+          </div>
+          <div class="auth-field">
+            <label for="signup-phone">Phone</label>
+            <input id="signup-phone" name="phone" type="tel" />
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-city">City</label>
+          <input id="signup-city" name="city" type="text" />
+        </div>
+
+        <button type="submit">Create account</button>
+        <p class="auth-status" id="signup-status"></p>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a id="auth-switch-link" href="signin.html">Sign in</a></p>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script type="module" src="js/components/navbar.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+  <script type="module" src="js/components/nav-auth.js"></script>
+  <script type="module" src="js/signup-page.js"></script>
+
+</body>
+</html>

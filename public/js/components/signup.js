@@ -1,4 +1,4 @@
-import { submitSignup } from "../data/mock-data.js";
+import { submitSignup } from "../data/api.js";
 
 const signupHTML = `
   <section class="cta">

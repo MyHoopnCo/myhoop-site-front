@@ -1,8 +1,9 @@
 /* ═══════════════════════════════════════════════════════════
-   Depends on: data/mock-data.js (fetchPartners)
+   Depends on: data/api.js (fetchPartners — still mocked, no
+   partners table in the backend yet)
    ═══════════════════════════════════════════════════════════ */
 
-   import { fetchPartners } from "../data/mock-data.js";
+   import { fetchPartners } from "../data/api.js";
 
    const grid = document.getElementById("partner-grid");
    
