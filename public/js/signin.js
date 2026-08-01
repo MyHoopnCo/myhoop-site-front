@@ -28,12 +28,21 @@ form.addEventListener("submit", async (e) => {
   submitBtn.disabled = true;
 
   try {
-    await login(email, password);
-    status.textContent = "Signed in! Redirecting...";
-    status.dataset.state = "success";
-
+    const user = await login(email, password);
     const params = new URLSearchParams(window.location.search);
-    window.location.href = safeRedirect(params.get("redirect"));
+    const redirect = params.get("redirect");
+    const name = user.role === "admin" ? "Admin" : user.first_name;
+ 
+    // Show a clear confirmation instead of silently redirecting away —
+    // the person can see they're actually signed in before moving on.
+    form.style.display = "none";
+    status.dataset.state = "success";
+    status.innerHTML = `
+      Signed in as <strong>${name}</strong>.
+      <a href="${redirect || "index.html"}" style="color: var(--orange); font-weight: 700;">
+        ${redirect ? "Continue" : "Go to homepage"}
+      </a>
+    `;
   } catch (err) {
     status.textContent = err.message || "Invalid email or password.";
     status.dataset.state = "error";

@@ -113,7 +113,14 @@
          status.textContent = "You're registered. Confirmation sent to your email.";
          status.dataset.state = "success";
          form.querySelector(".reg-submit").disabled = true;
-       } catch (err) {
+
+         document.dispatchEvent(
+            new CustomEvent("myhoop:registration-success", {
+              detail: { tournamentId: activeTournament.tournament_id },
+            })
+          );
+        
+        } catch (err) {
          status.textContent = err.message || "Something went wrong. Try again.";
          status.dataset.state = "error";
        }

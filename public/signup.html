@@ -63,7 +63,32 @@
           <label for="signup-city">City</label>
           <input id="signup-city" name="city" type="text" />
         </div>
+ 
+        <div class="auth-row">
+          <div class="auth-field">
+            <label for="signup-height">Height (cm)</label>
+            <input id="signup-height" name="height_cm" type="number" min="100" max="260" />
+          </div>
 
+          <div class="auth-field">
+            <label for="school-select-trigger">School</label>
+            <div class="custom-select" id="school-select">
+              <button type="button" class="custom-select-trigger" id="school-select-trigger">
+                <span id="school-select-label">Prefer not to say</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <ul class="custom-select-list" id="school-select-list" role="listbox">
+                <li role="option" data-value="" class="selected">Prefer not to say</li>
+                <li role="option" data-value="university">University</li>
+                <li role="option" data-value="college">College</li>
+                <li role="option" data-value="high_school">High School</li>
+                <li role="option" data-value="none">Not in school</li>
+              </ul>
+              <input type="hidden" id="signup-school" name="school_level" value="" />
+            </div>
+          </div>
+        </div>
+ 
         <button type="submit">Create account</button>
         <p class="auth-status" id="signup-status"></p>
       </form>
@@ -77,6 +102,7 @@
   <script type="module" src="js/components/navbar.js"></script>
   <script type="module" src="js/components/footer.js"></script>
   <script type="module" src="js/components/nav-auth.js"></script>
+  <script type="module" src="js/custom-select.js"></script>
   <script type="module" src="js/signup-page.js"></script>
 
 </body>

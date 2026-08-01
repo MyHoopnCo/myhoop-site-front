@@ -26,6 +26,8 @@
     gap: 1rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 2rem 0.5rem;
     scrollbar-width: none;
   }
@@ -141,4 +143,10 @@
     .strip-scroll,
     .strip-nav { padding-left: 1.25rem; padding-right: 1.25rem; }
     .tournament-card { flex-basis: 220px; }
+  }
+
+  @media (min-width: 1300px) {
+    .strip-scroll:has(> :nth-child(-n+4):last-child) {
+      justify-content: center;
+    }
   }

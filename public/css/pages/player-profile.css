@@ -1,0 +1,135 @@
+/* ── PLAYER PROFILE (players.html) ───────────────────────── */
+ 
+.profile-section {
+    background: var(--white);
+    padding: 130px 2rem 5rem;
+    min-height: 70vh;
+  }
+   
+  .profile-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+   
+  .profile-header {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+   
+  .profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--dark);
+    flex-shrink: 0;
+  }
+   
+  .profile-info { flex: 1; min-width: 240px; }
+   
+  .profile-name {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+   
+  .profile-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--gray);
+    margin-bottom: 14px;
+  }
+   
+  .profile-details {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+   
+  .profile-bio {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--black);
+    max-width: 55ch;
+  }
+   
+  .profile-section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin: 2.5rem 0 1rem;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 8px;
+  }
+   
+  .profile-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+   
+  .profile-stat-card {
+    background: var(--chalk);
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+  }
+   
+  .profile-stat-card .type-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--orange);
+    margin-bottom: 10px;
+    display: block;
+  }
+   
+  .profile-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 4px 0;
+    color: var(--gray);
+  }
+   
+  .profile-stat-row strong {
+    color: var(--black);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+  }
+   
+  .profile-empty-stats {
+    font-family: var(--font-body);
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+   
+  .profile-not-found {
+    text-align: center;
+    padding: 6rem 1rem;
+    font-family: var(--font-body);
+  }
+   
+  .profile-not-found a {
+    color: var(--orange);
+    font-weight: 700;
+  }
+   
+  @media (max-width: 600px) {
+    .profile-section { padding: 110px 1.25rem 3rem; }
+    .profile-header { gap: 1.25rem; }
+    .profile-photo { width: 120px; height: 120px; }
+    .profile-name { font-size: 2rem; }
+  }
+  

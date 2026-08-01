@@ -56,12 +56,18 @@
      tournaments.forEach((t) => scroll.appendChild(renderCard(t)));
    }
 
-   prevBtn.addEventListener("click", () => {
-     scroll.scrollBy({ left: -280, behavior: "smooth" });
-   });
+    prevBtn.addEventListener("click", () => {
+    scroll.scrollBy({ left: -280, behavior: "smooth" });
+    });
 
-   nextBtn.addEventListener("click", () => {
-     scroll.scrollBy({ left: 280, behavior: "smooth" });
-   });
+    nextBtn.addEventListener("click", () => {
+      scroll.scrollBy({ left: 280, behavior: "smooth" });
+    });
 
+    // Refresh spots-left / "Full" state right after a successful registration,
+    // instead of leaving stale numbers until the page is manually reloaded.
+    document.addEventListener("myhoop:registration-success", () => {
+      init();
+    });
+    
    init();

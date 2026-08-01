@@ -26,6 +26,11 @@ form.addEventListener("submit", async (e) => {
     last_name: form.elements.last_name.value.trim(),
     email: form.elements.email.value.trim(),
     password: form.elements.password.value,
+    age: form.elements.age.value ? Number(form.elements.age.value) : null,
+    phone: form.elements.phone.value.trim() || null,
+    city: form.elements.city.value.trim() || null,
+    height_cm: form.elements.height_cm.value ? Number(form.elements.height_cm.value) : null,
+    school_level: form.elements.school_level.value || null,
   };
 
   const age = form.elements.age.value;
@@ -40,12 +45,21 @@ form.addEventListener("submit", async (e) => {
   submitBtn.disabled = true;
 
   try {
-    await signup(payload);
-    status.textContent = "Account created! Redirecting...";
-    status.dataset.state = "success";
-
+    const user = await signup(payload);
     const params = new URLSearchParams(window.location.search);
-    window.location.href = safeRedirect(params.get("redirect"));
+    const redirect = params.get("redirect");
+ 
+    // Show a clear confirmation instead of silently redirecting away —
+    // the person can see the account was actually created before moving on.
+    form.style.display = "none";
+    status.dataset.state = "success";
+    status.innerHTML = `
+      Welcome, <strong>${user.first_name}</strong> — your account is ready.
+      <a href="${redirect || "index.html"}" style="color: var(--orange); font-weight: 700;">
+        ${redirect ? "Continue" : "Go to homepage"}
+      </a>
+    `;
+    
   } catch (err) {
     status.textContent = err.message || "Something went wrong. Try again.";
     status.dataset.state = "error";

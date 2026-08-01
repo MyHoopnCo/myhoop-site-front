@@ -11,7 +11,7 @@
    (e.g. once deployed, point it at the real API domain).
    ═══════════════════════════════════════════════════════════ */
  
-   const API_BASE = "http://localhost:3000/api";
+   const API_BASE = "http://10.0.0.41:3000/api";
  
    async function request(path, options = {}) {
      const res = await fetch(`${API_BASE}${path}`, {
@@ -138,6 +138,21 @@
        body: JSON.stringify(payload),
      });
      return { ok: true, data: body.data.registration };
+   }
+    
+   /* ── Admin actions on players ────────────────────────────────
+      Soft-delete only — the backend never runs a real DELETE FROM
+      players, it just flips is_active to false/true.
+      ═══════════════════════════════════════════════════════════ */
+    
+   export async function deactivatePlayer(playerId) {
+     const body = await request(`/players/${playerId}`, { method: "DELETE" });
+     return body.data.player;
+   }
+    
+   export async function reactivatePlayer(playerId) {
+     const body = await request(`/players/${playerId}/reactivate`, { method: "PATCH" });
+     return body.data.player;
    }
     
    /* ── Not yet backed by the database ──────────────────────────
