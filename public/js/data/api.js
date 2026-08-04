@@ -199,7 +199,7 @@
     
    export async function fetchPartners() {
      return [
-       { id: 1, name: "ERO Studio, Inc ", /*logo_url: "/images/partners/placeholder-1.png" */ },
-       { id: 2, name: "Union Basketball League", /*logo_url: "/images/partners/placeholder-2.png" */ },
+       { id: 1, name: "ERO Studio, Inc " /*logo_url: "/images/partners/placeholder-1.png" */ },
+       { id: 2, name: "Union Basketball League" /*logo_url: "/images/partners/placeholder-2.png" */ },
      ];
    }
