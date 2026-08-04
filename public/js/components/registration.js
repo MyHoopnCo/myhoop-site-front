@@ -12,7 +12,8 @@
    so the form only asks for what registrations actually needs.
    ═══════════════════════════════════════════════════════════ */
 
-   import { fetchCurrentUser, submitRegistration } from "../data/api.js";
+   import { fetchCurrentUser, submitRegistration, submitPayment } from "../data/api.js";
+   import { INTERAC_EMAIL } from "../config.js";
 
    const overlay = document.getElementById("reg-overlay");
    const box = document.getElementById("reg-box");
@@ -66,6 +67,20 @@
      `;
    }
 
+   function paymentStepMarkup(entryFee, fullName) {
+     return `
+       <div class="reg-payment">
+         <h4>One last step — payment</h4>
+         <p>Entry fee: <strong>$${entryFee}</strong></p>
+         <p>Send an Interac e-Transfer to <strong>${INTERAC_EMAIL}</strong> and include
+            <strong>"${fullName}"</strong> as the reference/note, so we can match it to your registration.</p>
+         <p class="reg-waitlist-note">You're on the waitlist until we can verify your payment was sent. Thank you!</p>
+         <button class="reg-submit" id="reg-payment-sent" type="button">I've sent the payment</button>
+         <p class="reg-status" id="reg-payment-status"></p>
+       </div>
+     `;
+   }
+
    async function render(tournament) {
      const user = await fetchCurrentUser();
 
@@ -75,11 +90,14 @@
        return;
      }
 
+     const entryFee = Number(tournament.entry_fee) || 0;
+
      box.innerHTML = `
        <div class="reg-head">
          <div>
            <h3>Register</h3>
            <p>${tournament.name} · ${new Date(tournament.starts_at).toLocaleDateString("en-US", { month: "long", day: "numeric" })} · ${tournament.location}</p>
+           <p class="reg-fee">${entryFee > 0 ? `Entry fee: $${entryFee}` : "Free entry"}</p>
          </div>
          <button class="reg-close" id="reg-close" aria-label="Close">✕</button>
        </div>
@@ -109,10 +127,48 @@
        status.dataset.state = "pending";
 
        try {
-         await submitRegistration(payload);
-         status.textContent = "You're registered. Confirmation sent to your email.";
-         status.dataset.state = "success";
+         const result = await submitRegistration(payload);
+         const registration = result.data;
+         const fullName = `${user.first_name} ${user.last_name}`;
+         const entryFee = Number(activeTournament.entry_fee) || 0;
+
          form.querySelector(".reg-submit").disabled = true;
+
+         if (entryFee > 0) {
+           // Payant : on affiche les infos de paiement dans la même fiche,
+           // pas de redirection vers une nouvelle page.
+           status.textContent = "";
+           status.dataset.state = "success";
+           status.insertAdjacentHTML("afterend", paymentStepMarkup(entryFee, fullName));
+
+           const payBtn = box.querySelector("#reg-payment-sent");
+           const payStatus = box.querySelector("#reg-payment-status");
+
+           payBtn.addEventListener("click", async () => {
+             payBtn.disabled = true;
+             payStatus.textContent = "Recording...";
+             payStatus.dataset.state = "pending";
+
+             try {
+               await submitPayment({
+                 player_id: user.player_id,
+                 registration_id: registration.registration_id,
+                 amount: entryFee,
+                 transfer_sender_name: fullName,
+                 method: "e_transfer",
+               });
+               payStatus.textContent = "Thanks — we'll verify your payment and confirm your spot soon.";
+               payStatus.dataset.state = "success";
+             } catch (err) {
+               payStatus.textContent = err.message || "Something went wrong. Try again.";
+               payStatus.dataset.state = "error";
+               payBtn.disabled = false;
+             }
+           });
+         } else {
+           // Gratuit : rien à payer, comportement inchangé.
+           status.textContent = "You're registered. Confirmation sent to your email.";
+         }
 
          document.dispatchEvent(
             new CustomEvent("myhoop:registration-success", {

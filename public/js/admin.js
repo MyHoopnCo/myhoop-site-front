@@ -14,6 +14,8 @@
     fetchPlayers,
     deactivatePlayer,
     reactivatePlayer,
+    fetchPendingPayments,
+    confirmPayment,
   } from "./data/api.js";
    
   const wrapper = document.getElementById("admin-wrapper");
@@ -45,6 +47,18 @@
       </tr>
     `;
   }
+
+  function paymentRowMarkup(payment) {
+    return `
+      <tr data-payment-id="${payment.payment_id}">
+        <td>${payment.first_name} ${payment.last_name}</td>
+        <td>${payment.tournament_name}</td>
+        <td>$${payment.amount}</td>
+        <td>${payment.transfer_sender_name || "—"}</td>
+        <td><button class="admin-action-btn reactivate" data-action="confirm">Confirm</button></td>
+      </tr>
+    `;
+  }
    
   async function renderDashboard() {
     wrapper.innerHTML = `
@@ -65,9 +79,28 @@
           <tbody id="admin-table-body"></tbody>
         </table>
       </div>
+
+      <h2 class="admin-title">Pending Payments</h2>
+      <p class="admin-sub">Confirm once the Interac e-Transfer has actually arrived — match by sender name/amount.</p>
+      <p class="admin-toast" id="admin-payments-toast"></p>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Tournament</th>
+              <th>Amount</th>
+              <th>Sender name (declared)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-payments-body"></tbody>
+        </table>
+      </div>
     `;
    
     await refreshTable();
+    await refreshPayments();
    
     document.getElementById("admin-table-body").addEventListener("click", async (e) => {
       const btn = e.target.closest(".admin-action-btn");
@@ -98,6 +131,30 @@
         btn.disabled = false;
       }
     });
+
+    document.getElementById("admin-payments-body").addEventListener("click", async (e) => {
+      const btn = e.target.closest(".admin-action-btn");
+      if (!btn) return;
+
+      const row = btn.closest("tr");
+      const paymentId = row.dataset.paymentId;
+      const toast = document.getElementById("admin-payments-toast");
+
+      btn.disabled = true;
+      toast.textContent = "Confirming...";
+      toast.dataset.state = "pending";
+
+      try {
+        await confirmPayment(paymentId);
+        toast.textContent = "Payment confirmed — registration updated.";
+        toast.dataset.state = "success";
+        await refreshPayments();
+      } catch (err) {
+        toast.textContent = err.message || "Something went wrong.";
+        toast.dataset.state = "error";
+        btn.disabled = false;
+      }
+    });
   }
    
   async function refreshTable() {
@@ -110,6 +167,18 @@
     }
    
     tbody.innerHTML = players.map(rowMarkup).join("");
+  }
+
+  async function refreshPayments() {
+    const payments = await fetchPendingPayments();
+    const tbody = document.getElementById("admin-payments-body");
+
+    if (payments.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" class="admin-empty">No pending payments.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = payments.map(paymentRowMarkup).join("");
   }
    
   async function init() {

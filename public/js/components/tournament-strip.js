@@ -27,13 +27,14 @@
 
      const full = tournament.spots_taken >= tournament.spots_total;
      const spotsLeft = tournament.spots_total - tournament.spots_taken;
+     const entryFee = Number(tournament.entry_fee) || 0;
 
      card.innerHTML = `
        <img class="tournament-banner" src="${tournament.banner_url || FALLBACK_BANNER}" alt="" loading="lazy" />
        <div class="tournament-body">
          <span class="tournament-date">${formatDate(tournament.starts_at)}</span>
          <span class="tournament-name">${tournament.name}</span>
-         <span class="tournament-meta">${tournament.location} · ${tournament.competition_type}</span>
+         <span class="tournament-meta">${tournament.location} · ${tournament.competition_type} · ${entryFee > 0 ? `$${entryFee}` : "Free"}</span>
          <span class="tournament-spots">${full ? "Full" : `${spotsLeft} spots left`}</span>
          <button class="participate-btn" ${full ? "disabled" : ""}>${full ? "Full" : "Participate"}</button>
        </div>
