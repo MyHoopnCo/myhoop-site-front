@@ -6,7 +6,6 @@
    as little as possible — but the RETURN SHAPES now follow the
    real Postgres schema (uuid ids, first_name/last_name instead
    of a single name, ppg/apg/rpg on the leaderboard, etc.).
-
    ═══════════════════════════════════════════════════════════ */
  
    const API_BASE = "https://myhoop-site-backend.onrender.com/api";
@@ -138,41 +137,25 @@
      return { ok: true, data: body.data.registration };
    }
 
-   /* ── Registrations ──────────────────────────────────────────
-      POST /api/registrations requires an authenticated, active player.
-      The backend only stores: player_id, tournament_id, team_id,
-      emergency_contact_name, emergency_contact_phone, medical_notes,
-      waiver_signed. (No referral_source / full_name / age / email /
-      phone columns on this table — those live on the player profile.)
-      ═══════════════════════════════════════════════════════════ */
-    
-    export async function submitRegistration(payload) {
-      const body = await request("/registrations", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-      return { ok: true, data: body.data.registration };
-    }
-  
-    /* ── Payments (Interac e-Transfer, confirmed manually by an admin) ─ */
-  
-    export async function submitPayment(payload) {
-      const body = await request("/payments", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-      return { ok: true, data: body.data.payment };
-    }
-  
-    export async function fetchPendingPayments() {
-      const body = await request("/payments/pending");
-      return body.data.payments;
-    }
-  
-    export async function confirmPayment(paymentId) {
-      const body = await request(`/payments/${paymentId}/confirm`, { method: "PATCH" });
-      return body.data.payment;
-    }
+   /* ── Payments (Interac e-Transfer, confirmed manually by an admin) ─ */
+
+   export async function submitPayment(payload) {
+     const body = await request("/payments", {
+       method: "POST",
+       body: JSON.stringify(payload),
+     });
+     return { ok: true, data: body.data.payment };
+   }
+
+   export async function fetchPendingPayments() {
+     const body = await request("/payments/pending");
+     return body.data.payments;
+   }
+
+   export async function confirmPayment(paymentId) {
+     const body = await request(`/payments/${paymentId}/confirm`, { method: "PATCH" });
+     return body.data.payment;
+   }
     
    /* ── Admin actions on players ────────────────────────────────
       Soft-delete only — the backend never runs a real DELETE FROM
