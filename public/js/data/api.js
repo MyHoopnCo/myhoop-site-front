@@ -6,12 +6,10 @@
    as little as possible — but the RETURN SHAPES now follow the
    real Postgres schema (uuid ids, first_name/last_name instead
    of a single name, ppg/apg/rpg on the leaderboard, etc.).
- 
-   ⚠️ CHANGE THIS if the backend isn't running on localhost:3000
-   (e.g. once deployed, point it at the real API domain).
+
    ═══════════════════════════════════════════════════════════ */
  
-   const API_BASE = "http://10.0.0.41:3000/api";
+   const API_BASE = "https://myhoop-site-backend.onrender.com/api";
  
    async function request(path, options = {}) {
      const res = await fetch(`${API_BASE}${path}`, {
