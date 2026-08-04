@@ -1,4 +1,5 @@
-import { submitSignup } from "../data/api.js";
+const googleSheetsURL =
+  "https://script.google.com/macros/s/AKfycbwXBm62VWog2tXTAidiv_hWTtTHTHbfeoBsnKEcB-NFCyBbbQJWbWWbbeGuCVAyxHYN/exec";
 
 const signupHTML = `
   <section class="cta">
@@ -43,14 +44,26 @@ form.addEventListener('submit', async (e) => {
   status.textContent = 'Submitting...';
   status.dataset.state = 'pending';
 
-  const result = await submitSignup(payload);
+  try {
+    const res = await fetch(googleSheetsURL, {
+      method: "POST",
+      body: JSON.stringify({ form: "runs", ...payload }),
+    });
+    const data = await res.json();
 
-  if (result.ok) {
-    status.textContent = "You're in. We'll be in touch.";
-    status.dataset.state = 'success';
-    form.reset();
-  } else {
-    status.textContent = 'Something went wrong. Try again.';
+    if (data.result === "success") {
+      status.textContent = "You're in. We'll be in touch.";
+      status.dataset.state = 'success';
+      form.reset();
+    } else if (data.result === "duplicate") {
+      status.textContent = "You're already on the list.";
+      status.dataset.state = 'success';
+    } else {
+      status.textContent = 'Something went wrong. Try again.';
+      status.dataset.state = 'error';
+    }
+  } catch (err) {
+    status.textContent = 'Server error. Try again.';
     status.dataset.state = 'error';
   }
 });

@@ -154,24 +154,16 @@
    }
     
    /* ── Not yet backed by the database ──────────────────────────
-      These two features were designed against tables that don't
-      exist in the current schema (a lightweight newsletter signup,
-      and a partners/sponsors table). Kept as harmless stubs so the
-      rest of the site doesn't break; wire them up once those tables
-      (or a decision to drop the features) exist.
+      This feature was designed against a table that doesn't exist
+      in the current schema yet (a partners/sponsors table). Kept
+      as a harmless stub so the rest of the site doesn't break;
+      wire it up once that table (or a decision to drop the
+      feature) exists.
       ═══════════════════════════════════════════════════════════ */
-    
-   export async function submitSignup(payload) {
-     console.warn(
-       "[api] submitSignup: no backend endpoint for this yet — request not sent.",
-       payload
-     );
-     return { ok: false, mock: true };
-   }
     
    export async function fetchPartners() {
      return [
-       { id: 1, name: "ERO Studio, Inc ", logo_url: "/images/partners/placeholder-1.png" },
-       { id: 2, name: "Union Basketball League", logo_url: "/images/partners/placeholder-2.png" },
+       { id: 1, name: "ERO Studio, Inc ", /*logo_url: "/images/partners/placeholder-1.png" */ },
+       { id: 2, name: "Union Basketball League", /*logo_url: "/images/partners/placeholder-2.png" */ },
      ];
    }
