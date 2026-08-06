@@ -8,7 +8,7 @@
    of a single name, ppg/apg/rpg on the leaderboard, etc.).
    ═══════════════════════════════════════════════════════════ */
  
-   const API_BASE = "https://myhoop-site-backend.onrender.com/api";
+   const API_BASE = "https://api.myhoop.ca/api";
  
    async function request(path, options = {}) {
      const res = await fetch(`${API_BASE}${path}`, {
