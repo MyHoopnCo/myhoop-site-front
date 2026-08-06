@@ -3,4 +3,4 @@
    secrets — safe to hardcode and edit directly here.
    ═══════════════════════════════════════════════════════════ */
 
-   export const INTERAC_EMAIL = "mouangassak@gmail.com";
+   export const INTERAC_EMAIL = "contact@myhoop.ca";
