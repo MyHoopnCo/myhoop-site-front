@@ -173,6 +173,20 @@
      });
      return { ok: true, data: body.data.registration };
    }
+
+   // Registrations of the signed-in player only (GET /api/registrations/me,
+   // protected). Returns: [{ registration_id, tournament_id, status,
+   // tournament_name, starts_at, location, ... }]. Returns [] if signed out
+   // rather than throwing, so callers can treat "no registrations" and
+   // "not signed in" the same way (nothing to badge).
+   export async function fetchMyRegistrations() {
+     try {
+       const body = await request("/registrations/me");
+       return body.data.registrations;
+     } catch (err) {
+       return [];
+     }
+   }
  
    /* ── Payments (Interac e-Transfer, confirmed manually by an admin) ─ */
  

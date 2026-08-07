@@ -12,13 +12,33 @@
    so the form only asks for what registrations actually needs.
    ═══════════════════════════════════════════════════════════ */
 
-   import { fetchCurrentUser, submitRegistration, submitPayment } from "../data/api.js";
+   import { fetchCurrentUser, fetchMyRegistrations, submitRegistration, submitPayment } from "../data/api.js";
    import { INTERAC_EMAIL } from "../config.js";
 
    const overlay = document.getElementById("reg-overlay");
    const box = document.getElementById("reg-box");
 
    let activeTournament = null;
+
+   const STATUS_LABELS = {
+     waitlisted: "Waitlisted",
+     confirmed: "Confirmed ✓",
+   };
+
+   // Shown instead of the form when the card's disabled state was somehow
+   // bypassed (stale render, direct call, race with a second tab, etc.) —
+   // the real source of truth is still the UNIQUE(player_id, tournament_id)
+   // constraint on the backend, this is just so the user isn't confused.
+   function alreadyRegisteredMarkup(tournament, registration) {
+     return `
+       <div class="reg-head">
+         <div><h3>Already registered</h3></div>
+         <button class="reg-close" id="reg-close" aria-label="Close">✕</button>
+       </div>
+       <p>You're already registered for ${tournament.name}.</p>
+       <span class="registration-badge ${registration.status}">${STATUS_LABELS[registration.status] || registration.status}</span>
+     `;
+   }
 
    function signedOutMarkup() {
      const redirect = encodeURIComponent(window.location.pathname + window.location.search);
@@ -86,6 +106,14 @@
 
      if (!user || user.role === "admin") {
        box.innerHTML = signedOutMarkup();
+       box.querySelector("#reg-close").addEventListener("click", closeRegistration);
+       return;
+     }
+
+     const myRegistrations = await fetchMyRegistrations();
+     const existing = myRegistrations.find((r) => r.tournament_id === tournament.tournament_id);
+     if (existing) {
+       box.innerHTML = alreadyRegisteredMarkup(tournament, existing);
        box.querySelector("#reg-close").addEventListener("click", closeRegistration);
        return;
      }
