@@ -34,7 +34,12 @@
 
         <div class="auth-field">
           <label for="signin-password">Password</label>
-          <input id="signin-password" name="password" type="password" required autocomplete="current-password" />
+          <div class="auth-password-wrap">
+            <input id="signin-password" name="password" type="password" required autocomplete="current-password" />
+            <button type="button" class="auth-password-toggle" id="signin-password-toggle" aria-label="Show password">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
         </div>
 
         <button type="submit">Sign In</button>

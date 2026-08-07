@@ -8,13 +8,14 @@
    ═══════════════════════════════════════════════════════════ */
 
 import { signup } from "./data/api.js";
-import { redirectQueryString, safeRedirect } from "./auth-utils.js";
+import { redirectQueryString, safeRedirect, initPasswordToggle, showAuthToast } from "./auth-utils.js";
 
 const form = document.getElementById("signup-form");
 const status = document.getElementById("signup-status");
 const switchLink = document.getElementById("auth-switch-link");
 
 switchLink.href = `signin.html${redirectQueryString()}`;
+initPasswordToggle("signup-password", "signup-password-toggle");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -48,18 +49,16 @@ form.addEventListener("submit", async (e) => {
     const user = await signup(payload);
     const params = new URLSearchParams(window.location.search);
     const redirect = params.get("redirect");
- 
-    // Show a clear confirmation instead of silently redirecting away —
-    // the person can see the account was actually created before moving on.
-    form.style.display = "none";
+
+    status.textContent = "";
     status.dataset.state = "success";
-    status.innerHTML = `
-      Welcome, <strong>${user.first_name}</strong> — your account is ready.
-      <a href="${redirect || "index.html"}" style="color: var(--orange); font-weight: 700;">
-        ${redirect ? "Continue" : "Go to homepage"}
-      </a>
-    `;
-    
+
+    // Brief confirmation toast, then automatically take the person back
+    // to wherever they were trying to go instead of stranding them here.
+    showAuthToast(`Welcome, <strong>${user.first_name}</strong> — your account is ready.`, () => {
+      window.location.href = redirect ? safeRedirect(redirect) : "index.html";
+    });
+
   } catch (err) {
     status.textContent = err.message || "Something went wrong. Try again.";
     status.dataset.state = "error";

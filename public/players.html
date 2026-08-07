@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/components/navbar.css" />
   <link rel="stylesheet" href="css/components/nav-auth.css" />
   <link rel="stylesheet" href="css/components/footer.css" />
+  <link rel="stylesheet" href="css/components/registration.css" />
+  <link rel="stylesheet" href="css/pages/auth.css" />
   <link rel="stylesheet" href="css/pages/player-profile.css" />
  
   <link rel="icon" type="image/png" sizes="32x32" href="images/global/Logo_NoWords.png">
@@ -26,6 +28,11 @@
       <!-- populated by js/player-profile.js -->
     </div>
   </section>
+
+  <!-- "Edit profile" modal — only ever opened when viewing your own profile -->
+  <div class="reg-overlay" id="account-overlay">
+    <div class="reg-box" id="account-box"></div>
+  </div>
  
   <div id="footer-container"></div>
  

@@ -60,6 +60,52 @@
     color: var(--black);
     max-width: 55ch;
   }
+
+  .profile-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--black);
+    background: var(--light);
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .profile-edit-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .profile-password-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray);
+    background: none;
+    border: 1.5px solid transparent;
+    border-radius: 6px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .profile-password-btn:hover { color: var(--orange); }
    
   .profile-section-title {
     font-family: var(--font-display);

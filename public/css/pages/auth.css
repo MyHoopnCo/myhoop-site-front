@@ -56,14 +56,71 @@
   opacity: 0.8;
 }
 
-.auth-form input {
+.auth-form input,
+.auth-form select {
   padding: 14px 18px;
   font-size: 1rem;
   border-radius: 6px;
   border: none;
   width: 100%;
   font-family: var(--font-body);
+  background: var(--white);
+  color: var(--black);
 }
+
+/* ── Password show/hide toggle ───────────────────────────── */
+.auth-password-wrap {
+  position: relative;
+}
+
+.auth-password-wrap input {
+  padding-right: 46px;
+}
+
+.auth-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+}
+
+.auth-password-toggle:hover { color: var(--black); }
+.auth-password-toggle.showing { color: var(--orange); }
+
+/* ── Auth confirmation toast ─────────────────────────────── */
+.auth-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--black);
+  color: var(--white);
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+  opacity: 0;
+  z-index: 999;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.auth-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.auth-toast i { color: var(--green); }
  
 /* ── CUSTOM SCROLLABLE DROPDOWN (school level) ────────────── */
 .custom-select {

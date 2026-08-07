@@ -45,7 +45,12 @@
 
         <div class="auth-field">
           <label for="signup-password">Password</label>
-          <input id="signup-password" name="password" type="password" required minlength="8" autocomplete="new-password" />
+          <div class="auth-password-wrap">
+            <input id="signup-password" name="password" type="password" required minlength="8" autocomplete="new-password" />
+            <button type="button" class="auth-password-toggle" id="signup-password-toggle" aria-label="Show password">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
         </div>
 
         <div class="auth-row">

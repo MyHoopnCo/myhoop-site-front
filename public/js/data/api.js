@@ -10,7 +10,7 @@
  
    const API_BASE = "https://api.myhoop.ca/api";
  
-   async function request(path, options = {}) {
+  async function request(path, options = {}) {
      const res = await fetch(`${API_BASE}${path}`, {
        credentials: "include", // required so the httpOnly jwt cookie is sent/received
        headers: {
@@ -31,6 +31,7 @@
        const message = body?.message || `Request failed (${res.status})`;
        const err = new Error(message);
        err.status = res.status;
+       err.body = body;
        throw err;
      }
     
@@ -120,6 +121,42 @@
    export async function logout() {
      await request("/auth/logout", { method: "POST" });
    }
+ 
+   // Updates the signed-in player's own profile fields. Never touches the
+   // password — that's a separate, more sensitive flow (see changePassword
+   // below), so this payload should only ever contain profile fields.
+   // Calls PUT /api/players/:id (protected by selfOrAdmin() server-side) —
+   // there is no separate /auth/me update route in this backend.
+   export async function updateAccount(playerId, payload) {
+    const body = await request(`/players/${playerId}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
+    return body.data.player;
+  }
+ 
+   // Changes the signed-in user's password. Requires the current password
+   // (server-side re-auth, not just "trust the session") and is rate
+   // limited server-side to one change per 30 days after the first one.
+   // On a 429 cooldown response, err.retryAfter (ISO date string) is set
+   // from the response body so the UI can show exactly when it's allowed
+   // again — see the sample Express handler in chat for the shape.
+   // NOTE: this calls POST /api/auth/change-password — add that route on
+   // the backend if it doesn't exist yet.
+   export async function changePassword(currentPassword, newPassword) {
+     try {
+       const body = await request("/auth/change-password", {
+         method: "POST",
+         body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+       });
+       return body.data.user;
+     } catch (err) {
+       if (err.status === 429 && err.body?.retry_after) {
+         err.retryAfter = err.body.retry_after;
+       }
+       throw err;
+     }
+   }
     
    /* ── Registrations ──────────────────────────────────────────
       POST /api/registrations requires an authenticated, active player.
@@ -136,9 +173,9 @@
      });
      return { ok: true, data: body.data.registration };
    }
-
+ 
    /* ── Payments (Interac e-Transfer, confirmed manually by an admin) ─ */
-
+ 
    export async function submitPayment(payload) {
      const body = await request("/payments", {
        method: "POST",
@@ -146,12 +183,12 @@
      });
      return { ok: true, data: body.data.payment };
    }
-
+ 
    export async function fetchPendingPayments() {
      const body = await request("/payments/pending");
      return body.data.payments;
    }
-
+ 
    export async function confirmPayment(paymentId) {
      const body = await request(`/payments/${paymentId}/confirm`, { method: "PATCH" });
      return body.data.payment;
