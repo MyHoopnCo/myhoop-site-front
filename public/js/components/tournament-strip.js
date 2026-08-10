@@ -46,7 +46,7 @@
          <span class="tournament-date">${formatDate(tournament.starts_at)}</span>
          <span class="tournament-name">${tournament.name}</span>
          <span class="tournament-meta">${tournament.location} · ${tournament.competition_type} · ${entryFee > 0 ? `$${entryFee}` : "Free"}</span>
-         <span class="tournament-spots">${full ? "Full" : `${spotsLeft} spots left`}</span>
+         ${full ? `<span class="tournament-spots">Full</span>` : ""}
          ${actionMarkup}
        </div>
      `;
