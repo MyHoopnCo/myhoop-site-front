@@ -57,8 +57,9 @@ const LEGACY_LEAGUE = [
   
   // MyHoop-owned events
   const MYHOOP_EVENTS = [
-    { id:1001, city:"calgary", type:"allstar", title:"All-Star Showcase",                                                    date:"2026-06-13", time:"2:00 PM",           location:"TBD",                    desc:"Four teams, one day. The best hoopers go head-to-head.", contact:"Presented by MyHoop × Ero" },
-    { id:2001, city:"calgary", type:"tourney", title:"We Hoop, Kids Win! Charity Basketball Tournament",                     date:"2026-05-22", time:"8:00 AM - 8:00 PM", location:"Jack Simpson Gymnasium", desc:"Charity basketball tournament in support of the Alberta Children’s Hospital Foundation. Teams of 12–14 players. Registration is $325 per team, with food, drinks, and a T-shirt included for each player.", contact:"Contact: @ccc.ucalgary" }
+    { id:2001, city:"calgary", type:"tourney",  title:"We Hoop, Kids Win! Charity Basketball Tournament",                    date:"2026-05-22", time:"8:00 AM - 8:00 PM",   location:"Jack Simpson Gymnasium",    desc:"Charity basketball tournament in support of the Alberta Children’s Hospital Foundation. Teams of 12–14 players. Registration is $325 per team, with food, drinks, and a T-shirt included for each player.", contact:"Contact: @ccc.ucalgary" },
+    { id:3001, city:"edmonton", type:"pickup",  title:"Myhoop x ERO: Draft",                                                 date:"2026-08-16", time:"TBD",                 location:"10149 Saskatchewan Drive NW", desc:"Draft Day for the MyHoop x ERO All-Star Classic. Players compete and play for a spot and are drafted onto one of four brand-represented teams. $15 entry fee.",           contact:"contact@myhoop.ca" },
+    { id:3002, city:"edmonton", type:"allstar", title:"All-start Classic ",                                                  date:"2026-08-23", time:"TBD",                 location:"Edmonton (more info soon)", desc:"The MyHoop x ERO All-Star Classic brings four brand-represented teams together for a community-driven basketball tournament. 4 brands, 1 winner",                         contact:"contact@myhoop.ca" },
   ];
   
   // Final event list used by calendar.js
