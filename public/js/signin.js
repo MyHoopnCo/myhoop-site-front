@@ -8,6 +8,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 import { login } from "./data/api.js";
+import { esc } from "./utils/escape.js";
 import { redirectQueryString, safeRedirect, initPasswordToggle, showAuthToast } from "./auth-utils.js";
 
 const form = document.getElementById("signin-form");
@@ -40,7 +41,7 @@ form.addEventListener("submit", async (e) => {
     // Brief confirmation toast, then automatically take the person back
     // to wherever they were trying to go (e.g. a tournament registration)
     // instead of stranding them on this page.
-    showAuthToast(`Signed in as <strong>${name}</strong>.`, () => {
+    showAuthToast(`Signed in as <strong>${esc(name)}</strong>.`, () => {
       window.location.href = redirect ? safeRedirect(redirect) : "index.html";
     });
   } catch (err) {

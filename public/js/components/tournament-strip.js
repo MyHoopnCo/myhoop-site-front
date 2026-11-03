@@ -9,6 +9,7 @@
    ═══════════════════════════════════════════════════════════ */
 
    import { fetchTournaments, fetchMyRegistrations } from "../data/api.js";
+   import { esc } from "../utils/escape.js";
 
    const scroll = document.getElementById("strip-scroll");
    const prevBtn = document.getElementById("strip-prev");
@@ -37,15 +38,15 @@
      const entryFee = Number(tournament.entry_fee) || 0;
 
      const actionMarkup = myRegistration
-       ? `<span class="registration-badge ${myRegistration.status}">${STATUS_LABELS[myRegistration.status] || myRegistration.status}</span>`
+       ? `<span class="registration-badge ${esc(myRegistration.status)}">${esc(STATUS_LABELS[myRegistration.status] || myRegistration.status)}</span>`
        : `<button class="participate-btn" ${full ? "disabled" : ""}>${full ? "Full" : "Participate"}</button>`;
 
      card.innerHTML = `
-       <img class="tournament-banner" src="${tournament.banner_url || FALLBACK_BANNER}" alt="" loading="lazy" />
+       <img class="tournament-banner" src="${esc(tournament.banner_url || FALLBACK_BANNER)}" alt="" loading="lazy" />
        <div class="tournament-body">
          <span class="tournament-date">${formatDate(tournament.starts_at)}</span>
-         <span class="tournament-name">${tournament.name}</span>
-         <span class="tournament-meta">${tournament.location} · ${tournament.competition_type} · ${entryFee > 0 ? `$${entryFee}` : "Free"}</span>
+         <span class="tournament-name">${esc(tournament.name)}</span>
+         <span class="tournament-meta">${esc(tournament.location)} · ${esc(tournament.competition_type)} · ${entryFee > 0 ? `$${entryFee}` : "Free"}</span>
          ${full ? `<span class="tournament-spots">Full</span>` : ""}
          ${actionMarkup}
        </div>

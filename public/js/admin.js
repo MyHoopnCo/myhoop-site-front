@@ -5,18 +5,19 @@
    (soft-delete only — the backend never runs a real DELETE FROM
    players, see player.repository.js).
  
-   Depends on: data/api.js (fetchCurrentUser, fetchPlayers,
+   Depends on: data/api.js (fetchCurrentUser, fetchPlayersAdmin,
    deactivatePlayer, reactivatePlayer)
    ═══════════════════════════════════════════════════════════ */
  
    import {
     fetchCurrentUser,
-    fetchPlayers,
+    fetchPlayersAdmin,
     deactivatePlayer,
     reactivatePlayer,
     fetchPendingPayments,
     confirmPayment,
   } from "./data/api.js";
+  import { esc } from "./utils/escape.js";
    
   const wrapper = document.getElementById("admin-wrapper");
    
@@ -33,10 +34,10 @@
   function rowMarkup(player) {
     const isActive = player.is_active;
     return `
-      <tr class="${isActive ? "" : "inactive"}" data-player-id="${player.player_id}">
-        <td>${player.first_name} ${player.last_name}</td>
-        <td>${player.email}</td>
-        <td>${player.city || "—"}</td>
+      <tr class="${isActive ? "" : "inactive"}" data-player-id="${esc(player.player_id)}">
+        <td>${esc(player.first_name)} ${esc(player.last_name)}</td>
+        <td>${esc(player.email)}</td>
+        <td>${esc(player.city) || "—"}</td>
         <td><span class="admin-status-pill ${isActive ? "active" : "inactive"}">${isActive ? "Active" : "Inactive"}</span></td>
         <td>
           ${isActive
@@ -50,11 +51,11 @@
 
   function paymentRowMarkup(payment) {
     return `
-      <tr data-payment-id="${payment.payment_id}">
-        <td>${payment.first_name} ${payment.last_name}</td>
-        <td>${payment.tournament_name}</td>
-        <td>$${payment.amount}</td>
-        <td>${payment.transfer_sender_name || "—"}</td>
+      <tr data-payment-id="${esc(payment.payment_id)}">
+        <td>${esc(payment.first_name)} ${esc(payment.last_name)}</td>
+        <td>${esc(payment.tournament_name)}</td>
+        <td>$${esc(payment.amount)}</td>
+        <td>${esc(payment.transfer_sender_name) || "—"}</td>
         <td><button class="admin-action-btn reactivate" data-action="confirm">Confirm</button></td>
       </tr>
     `;
@@ -158,7 +159,7 @@
   }
    
   async function refreshTable() {
-    const players = await fetchPlayers();
+    const players = await fetchPlayersAdmin();
     const tbody = document.getElementById("admin-table-body");
    
     if (players.length === 0) {

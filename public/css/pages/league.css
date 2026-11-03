@@ -1,0 +1,684 @@
+/* ── SECTION LIGUE PARTENAIRE (league.html) ───────────────────
+   ═══════════════════════════════════════════════════════════
+   Used on: league.html
+
+   Le préfixe .lg- isole cette section du reste du site : une ligue
+   partenaire a sa propre identité (sa couleur, son logo), et rien ici
+   ne doit déteindre sur les pages MyHoop.
+   ═══════════════════════════════════════════════════════════ */
+
+.league-page {
+  background: var(--chalk);
+  min-height: 100vh;
+  padding-top: 65px;   /* la navbar est en position absolute */
+}
+
+/* ── En-tête de la ligue ──────────────────────────────────── */
+
+.lg-header {
+  background: var(--black);
+  color: var(--white);
+  padding: 2.5rem 2rem 1.25rem;
+}
+
+.lg-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.lg-identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lg-league-logo { height: 56px; width: auto; }
+
+.lg-league-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.lg-league-sub {
+  font-family: var(--font-body);
+  color: #cfcfcf;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.lg-live {
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* La phrase qui sépare MyHoop de la ligue : discrète, mais toujours là. */
+.lg-hosted {
+  max-width: 1200px;
+  margin: 1rem auto 0;
+  font-size: 0.8rem;
+  color: #9a9a9a;
+  border-top: 1px solid #2a2a2a;
+  padding-top: 0.85rem;
+}
+
+.lg-season, .lg-phase {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lg-phase-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gray);
+  font-weight: 700;
+}
+
+.lg-header .lg-phase-label { color: #9a9a9a; }
+
+.lg-season select, .lg-phase select {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d5d5d5;
+  background: var(--white);
+  color: var(--black);
+  cursor: pointer;
+}
+
+/* ── Onglets ──────────────────────────────────────────────── */
+
+.lg-tabs {
+  background: var(--white);
+  border-bottom: 1px solid #e3e3e3;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.lg-tabs > .lg-tab:first-child { margin-left: max(0px, calc((100vw - 1200px) / 2)); }
+.lg-tabs > .lg-phase { margin-left: auto; padding: 0 0 0 1rem; }
+
+.lg-tab {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  padding: 1rem 1.15rem;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.lg-tab:hover { color: var(--black); }
+.lg-tab.is-active { color: var(--black); border-bottom-color: var(--orange); }
+
+.lg-subtabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.lg-subtab {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: 1px solid #ddd;
+  background: var(--white);
+  color: var(--gray);
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lg-subtab:hover { border-color: var(--black); color: var(--black); }
+.lg-subtab.is-active { background: var(--black); border-color: var(--black); color: var(--white); }
+
+/* ── Corps ────────────────────────────────────────────────── */
+
+.lg-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.lg-block { margin-bottom: 2.5rem; }
+
+.lg-block-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.9rem;
+}
+
+.lg-count, .lg-note {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 1rem;
+}
+
+.lg-note { margin-top: 0.85rem; }
+.lg-muted { color: var(--gray); }
+.lg-pos { color: #1c7a2e; font-weight: 700; }
+.lg-neg { color: #a32020; font-weight: 700; }
+
+.lg-state {
+  padding: 3.5rem 1rem;
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+.lg-state-error { color: #a32020; }
+
+/* ── Tableaux ─────────────────────────────────────────────── */
+
+.lg-table-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+}
+
+.lg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.lg-table th {
+  text-align: right;
+  padding: 12px 10px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gray);
+  border-bottom: 2px solid var(--black);
+  background: var(--white);
+}
+
+.lg-table td {
+  text-align: right;
+  padding: 12px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.lg-table tbody tr:last-child td { border-bottom: none; }
+.lg-table tbody tr:hover { background: #fafafa; }
+
+.lg-table th.lg-team-head, .lg-table td.lg-cell-team,
+.lg-table td.lg-cell-player { text-align: left; }
+
+.lg-rank-head, .lg-rank, .lg-jersey { text-align: center !important; width: 48px; color: var(--gray); }
+.lg-strong { font-weight: 700; }
+
+/* La colonne équipe reste visible quand le tableau défile sur téléphone. */
+.lg-cell-team, .lg-team-head {
+  position: sticky;
+  left: 0;
+  background: var(--white);
+  min-width: 190px;
+}
+
+.lg-table tbody tr:hover .lg-cell-team { background: #fafafa; }
+
+.lg-cell-team { display: table-cell; }
+
+.lg-cell-team, .lg-cell-player {
+  white-space: nowrap;
+}
+
+.lg-team-name {
+  font-weight: 700;
+  color: var(--black);
+  text-decoration: none;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+a.lg-team-name:hover { color: var(--orange); }
+
+.lg-short {
+  color: var(--gray);
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+.lg-cell-form { white-space: nowrap; }
+
+.lg-pill {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-right: 3px;
+  color: var(--white);
+}
+
+.lg-pill-w { background: #1c7a2e; }
+.lg-pill-l { background: #a32020; }
+
+/* ── Pastilles d'équipe et avatars ────────────────────────── */
+
+.lg-badge {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.lg-badge-sm { width: 26px; height: 26px; }
+.lg-badge-lg { width: 56px; height: 56px; border-radius: 10px; }
+.lg-badge-xl { width: 76px; height: 76px; border-radius: 12px; }
+
+.lg-badge-text {
+  color: var(--white);
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.lg-badge-sm.lg-badge-text { font-size: 0.75rem; line-height: 26px; }
+.lg-badge-lg.lg-badge-text { font-size: 1.4rem; line-height: 56px; }
+.lg-badge-xl.lg-badge-text { font-size: 1.9rem; line-height: 76px; }
+
+.lg-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.lg-avatar-empty { background: #e6e6e6; }
+
+.lg-cell-player a { color: var(--black); font-weight: 600; text-decoration: none; }
+.lg-cell-player a:hover { color: var(--orange); }
+
+.lg-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #eee;
+  color: var(--gray);
+  margin-left: 6px;
+}
+
+.lg-tag-forfeit { background: #f5dcdc; color: #a32020; }
+.lg-tag-postponed { background: #fdf0d5; color: #8a6116; }
+
+/* ── Grille des équipes ───────────────────────────────────── */
+
+.lg-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 1rem;
+}
+
+.lg-team-card {
+  background: var(--white);
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--black);
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lg-team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.09);
+}
+
+.lg-team-card-top {
+  background: var(--team-color, var(--black));
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.lg-team-card-body { padding: 1rem 1.1rem 1.25rem; }
+
+.lg-team-card-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.6px;
+  line-height: 1.15;
+}
+
+.lg-team-card-record {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.lg-card-pct { color: var(--gray); font-weight: 400; margin-left: 4px; }
+
+.lg-card-rank {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+
+/* ── Fiche d'une équipe ───────────────────────────────────── */
+
+.lg-team-head {
+  background: var(--team-color, var(--black));
+  color: var(--white);
+  padding: 1.5rem 2rem 2rem;
+}
+
+.lg-back {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.lg-back:hover { color: var(--white); }
+
+.lg-team-head-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.lg-team-head-league {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.85;
+}
+
+.lg-team-head-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.lg-team-head-record { font-weight: 700; font-size: 1.05rem; margin-top: 4px; }
+.lg-head-pct { opacity: 0.8; font-weight: 400; margin-left: 4px; }
+
+.lg-head-stats {
+  max-width: 1200px;
+  margin: 1.5rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 0.75rem;
+  background: rgba(0,0,0,0.22);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.lg-head-stats div { text-align: center; }
+
+/* `div > span` et pas `span` : sinon la règle attrape aussi les pastilles de
+   forme (W/L), qui sont des <span> et doivent rester côte à côte. */
+.lg-head-stats div > span {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.lg-head-stats strong { font-size: 1.1rem; }
+.lg-head-stats .lg-cell-form { display: block; white-space: nowrap; }
+.lg-head-stats .lg-pos, .lg-head-stats .lg-neg { color: var(--white); }
+
+.lg-team-head + .lg-block,
+.lg-team-head ~ .lg-block { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+
+/* ── Matchs ───────────────────────────────────────────────── */
+
+.lg-day { margin-bottom: 1.5rem; }
+
+.lg-day-title {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gray);
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e3e3e3;
+  margin-bottom: 0.85rem;
+}
+
+.lg-day-games {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 0.85rem;
+}
+
+.lg-match {
+  background: var(--white);
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 0.9rem 1rem 0.75rem;
+}
+
+/* Les deux équipes l'une sous l'autre : un nom long passe à la ligne au lieu
+   d'être coupé, et le score reste aligné à droite. */
+.lg-match-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+.lg-match-row .lg-team-name {
+  margin-left: 0;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.lg-match-score {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  color: var(--gray);
+  min-width: 2ch;
+  text-align: right;
+}
+
+.lg-match.is-done .lg-match-row:not(.is-winner) .lg-team-name { color: var(--gray); }
+.lg-match-row.is-winner .lg-team-name { font-weight: 700; color: var(--black); }
+.lg-match-row.is-winner .lg-match-score { color: var(--black); font-weight: 700; }
+
+.lg-match-meta {
+  font-size: 0.75rem;
+  color: var(--gray);
+  border-top: 1px solid #f0f0f0;
+  margin-top: 6px;
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lg-match-time {
+  font-weight: 700;
+  color: var(--black);
+  font-size: 0.82rem;
+}
+
+.lg-watch {
+  margin-left: auto;
+  color: var(--orange);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ── Leaders ──────────────────────────────────────────────── */
+
+.lg-leader-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1rem;
+}
+
+.lg-leader-card {
+  background: var(--white);
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+
+.lg-leader-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.lg-leader-unit {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--gray);
+}
+
+.lg-leader-list { list-style: none; }
+
+.lg-leader-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.lg-leader-row:last-child { border-bottom: none; }
+
+.lg-leader-row.is-top .lg-leader-value { color: var(--orange); font-size: 1.15rem; }
+
+.lg-leader-rank {
+  width: 20px;
+  color: var(--gray);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.lg-leader-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.lg-leader-name a, .lg-leader-name span:first-child {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--black);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lg-leader-name a:hover { color: var(--orange); }
+.lg-leader-name small { color: var(--gray); font-size: 0.74rem; }
+
+.lg-leader-value {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+
+.lg-leader-card .lg-state { padding: 1.5rem 0; font-size: 0.85rem; }
+
+/* ── Téléphone ────────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .lg-header { padding: 2rem 1.25rem 1rem; }
+  .lg-tabs { padding: 0 1.25rem; }
+  .lg-tabs > .lg-tab:first-child { margin-left: 0; }
+  .lg-tabs > .lg-phase { margin-left: 0.5rem; }
+  .lg-main { padding: 1.5rem 1.25rem; }
+  .lg-team-head { padding: 1.25rem 1.25rem 1.5rem; }
+  .lg-team-head ~ .lg-block { padding: 0 1.25rem; }
+  .lg-day-games { grid-template-columns: 1fr; }
+  .lg-head-stats { grid-template-columns: repeat(2, 1fr); }
+  .lg-league-name { font-size: 2rem; }
+}
+
+/* Bouton « voir plus » du calendrier : une saison fait près de 200 matchs,
+   on en révèle quelques journées à la fois. */
+.lg-more {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  color: var(--black);
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.lg-more:hover { border-color: var(--black); color: var(--orange); }

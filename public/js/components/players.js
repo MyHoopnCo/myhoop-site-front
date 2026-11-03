@@ -10,6 +10,7 @@
    ═══════════════════════════════════════════════════════════ */
 
    import { fetchPlayers, fetchPlayerStats } from "../data/api.js";
+   import { esc } from "../utils/escape.js";
  
    const strip = document.getElementById("player-strip");
    const results = document.getElementById("player-results");
@@ -51,13 +52,13 @@
  
      const card = document.createElement("a");
      card.className = "player-card reveal";
-     card.href = `players.html?slug=${player.slug}`;
+     card.href = `players.html?slug=${encodeURIComponent(player.slug)}`;
  
      card.innerHTML = `
-       <img class="player-photo" src="${player.avatar_url || AVATAR_FALLBACK}" alt="${player.first_name} ${player.last_name}" loading="lazy" />
+       <img class="player-photo" src="${esc(player.avatar_url || AVATAR_FALLBACK)}" alt="${esc(player.first_name)} ${esc(player.last_name)}" loading="lazy" />
        <div class="player-card-body">
-         <div class="player-name">${player.first_name} ${player.last_name}</div>
-         <div class="player-sub">${subLine}</div>
+         <div class="player-name">${esc(player.first_name)} ${esc(player.last_name)}</div>
+         <div class="player-sub">${esc(subLine)}</div>
          <div class="player-quickstats">
            <div class="qs"><strong>${headline.games_played}</strong><span>Games</span></div>
            <div class="qs"><strong>${headline.primary}</strong><span>${headline.primaryLabel}</span></div>
@@ -74,13 +75,13 @@
  
      const row = document.createElement("a");
      row.className = "player-row";
-     row.href = `players.html?slug=${player.slug}`;
+     row.href = `players.html?slug=${encodeURIComponent(player.slug)}`;
  
      row.innerHTML = `
-       <img class="player-row-photo" src="${player.avatar_url || AVATAR_FALLBACK}" alt="" loading="lazy" />
+       <img class="player-row-photo" src="${esc(player.avatar_url || AVATAR_FALLBACK)}" alt="" loading="lazy" />
        <span>
-         <span class="player-row-name">${player.first_name} ${player.last_name}</span><br/>
-         <span class="player-row-sub">${subLine || "&nbsp;"}</span>
+         <span class="player-row-name">${esc(player.first_name)} ${esc(player.last_name)}</span><br/>
+         <span class="player-row-sub">${subLine ? esc(subLine) : "&nbsp;"}</span>
        </span>
        <span class="player-row-stat">${headline.primary} ${headline.primaryLabel}</span>
      `;

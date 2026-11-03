@@ -7,6 +7,7 @@
    ═══════════════════════════════════════════════════════════ */
 
    import { fetchCurrentUser } from "../data/api.js";
+   import { esc } from "../utils/escape.js";
 
    const desktopSlot = document.getElementById("navAuth");
    const mobileSlot = document.getElementById("navAuthMobile");
@@ -32,12 +33,12 @@
      if (user) {
        const fullName = `${user.first_name} ${user.last_name}`;
        desktopSlot.innerHTML = `
-         <a class="nav-profile" href="players.html?slug=${user.slug}">
-           <span class="avatar">${initials(fullName)}</span>
-           ${user.first_name}
+         <a class="nav-profile" href="players.html?slug=${encodeURIComponent(user.slug)}">
+           <span class="avatar">${esc(initials(fullName))}</span>
+           ${esc(user.first_name)}
          </a>
        `;
-       mobileSlot.innerHTML = `<a href="players.html?slug=${user.slug}">My profile</a>`;
+       mobileSlot.innerHTML = `<a href="players.html?slug=${encodeURIComponent(user.slug)}">My profile</a>`;
      } else {
        desktopSlot.innerHTML = `
          <a class="nav-signin" href="signin.html">Sign in</a>
