@@ -8,6 +8,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 import { signup } from "./data/api.js";
+import { esc } from "./utils/escape.js";
 import { redirectQueryString, safeRedirect, initPasswordToggle, showAuthToast } from "./auth-utils.js";
 
 const form = document.getElementById("signup-form");
@@ -55,7 +56,7 @@ form.addEventListener("submit", async (e) => {
 
     // Brief confirmation toast, then automatically take the person back
     // to wherever they were trying to go instead of stranding them here.
-    showAuthToast(`Welcome, <strong>${user.first_name}</strong> — your account is ready.`, () => {
+    showAuthToast(`Welcome, <strong>${esc(user.first_name)}</strong> — your account is ready.`, () => {
       window.location.href = redirect ? safeRedirect(redirect) : "index.html";
     });
 

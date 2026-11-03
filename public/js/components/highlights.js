@@ -9,6 +9,7 @@
    ═══════════════════════════════════════════════════════════ */
 
    import { fetchHighlights } from "../data/api.js";
+   import { esc } from "../utils/escape.js";
 
    const grid = document.getElementById("highlight-grid");
    const filterBar = document.getElementById("highlight-filters");
@@ -24,7 +25,7 @@
    const PAGE_SIZE = 6;
 
    function thumbnailFor(youtubeId) {
-     return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
+     return `https://img.youtube.com/vi/${encodeURIComponent(youtubeId)}/hqdefault.jpg`;
    }
 
    function renderCard(highlight) {
@@ -36,11 +37,11 @@
      card.dataset.title = highlight.title;
 
      card.innerHTML = `
-       <img src="${thumbnailFor(highlight.youtube_id)}" alt="" loading="lazy" />
+       <img src="${esc(thumbnailFor(highlight.youtube_id))}" alt="" loading="lazy" />
        <span class="play-icon"></span>
        <span class="highlight-meta">
-         <span class="h-title">${highlight.title}</span>
-         <span class="h-tag">${highlight.competition_type}</span>
+         <span class="h-title">${esc(highlight.title)}</span>
+         <span class="h-tag">${esc(highlight.competition_type)}</span>
        </span>
      `;
 
@@ -79,8 +80,8 @@
    function openTheater(highlight) {
      theaterTitle.textContent = highlight.title;
      frameWrap.innerHTML = `<iframe
-         src="https://www.youtube.com/embed/${highlight.youtube_id}?autoplay=1"
-         title="${highlight.title}"
+         src="https://www.youtube.com/embed/${encodeURIComponent(highlight.youtube_id)}?autoplay=1"
+         title="${esc(highlight.title)}"
          allow="autoplay; encrypted-media; picture-in-picture"
          allowfullscreen
        ></iframe>`;

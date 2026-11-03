@@ -10,6 +10,7 @@
  
    import { fetchPlayerBySlug, fetchPlayerStats, fetchCurrentUser, updateAccount, changePassword } from "./data/api.js";
    import { initPasswordToggle, showAuthToast } from "./auth-utils.js";
+   import { esc } from "./utils/escape.js";
  
    const wrapper = document.getElementById("profile-wrapper");
    const overlay = document.getElementById("account-overlay");
@@ -48,7 +49,7 @@
    
      return `
        <div class="profile-stat-card">
-         <span class="type-label">${line.competition_type}</span>
+         <span class="type-label">${esc(line.competition_type)}</span>
          <div class="profile-stat-row"><span>Games played</span><strong>${line.games_played}</strong></div>
          ${record
            ? `<div class="profile-stat-row"><span>Record</span><strong>${record}</strong></div>`
@@ -73,44 +74,44 @@
          <div class="reg-row">
            <div class="reg-field">
              <label for="account-first-name">First name</label>
-             <input id="account-first-name" name="first_name" type="text" value="${user.first_name || ""}" required />
+             <input id="account-first-name" name="first_name" type="text" value="${esc(user.first_name)}" required />
            </div>
            <div class="reg-field">
              <label for="account-last-name">Last name</label>
-             <input id="account-last-name" name="last_name" type="text" value="${user.last_name || ""}" required />
+             <input id="account-last-name" name="last_name" type="text" value="${esc(user.last_name)}" required />
            </div>
          </div>
  
          <div class="reg-field">
            <label for="account-email">Email</label>
-           <input id="account-email" name="email" type="email" value="${user.email || ""}" required />
+           <input id="account-email" name="email" type="email" value="${esc(user.email)}" required />
          </div>
  
          <div class="reg-row">
            <div class="reg-field">
              <label for="account-age">Age</label>
-             <input id="account-age" name="age" type="number" min="5" max="100" value="${user.age ?? ""}" />
+             <input id="account-age" name="age" type="number" min="5" max="100" value="${esc(user.age)}" />
            </div>
            <div class="reg-field">
              <label for="account-phone">Phone</label>
-             <input id="account-phone" name="phone" type="tel" value="${user.phone || ""}" />
+             <input id="account-phone" name="phone" type="tel" value="${esc(user.phone)}" />
            </div>
          </div>
  
          <div class="reg-field">
            <label for="account-city">City</label>
-           <input id="account-city" name="city" type="text" value="${user.city || ""}" />
+           <input id="account-city" name="city" type="text" value="${esc(user.city)}" />
          </div>
  
          <div class="reg-field">
            <label for="account-bio">Bio <span class="hint">shown on your public profile</span></label>
-           <textarea id="account-bio" name="bio" maxlength="500">${user.bio || ""}</textarea>
+           <textarea id="account-bio" name="bio" maxlength="500">${esc(user.bio)}</textarea>
          </div>
  
          <div class="reg-row">
            <div class="reg-field">
              <label for="account-height">Height (cm)</label>
-             <input id="account-height" name="height_cm" type="number" min="100" max="260" value="${user.height_cm ?? ""}" />
+             <input id="account-height" name="height_cm" type="number" min="100" max="260" value="${esc(user.height_cm)}" />
            </div>
            <div class="reg-field">
              <label for="account-school">School</label>
@@ -347,12 +348,12 @@
   // whole page blank while we wait on a second network call.
   wrapper.innerHTML = `
     <div class="profile-header">
-      <img class="profile-photo" src="${player.avatar_url || AVATAR_FALLBACK}" alt="${player.first_name} ${player.last_name}" />
+      <img class="profile-photo" src="${esc(player.avatar_url || AVATAR_FALLBACK)}" alt="${esc(player.first_name)} ${esc(player.last_name)}" />
       <div class="profile-info">
-        <h1 class="profile-name">${player.first_name} ${player.last_name}</h1>
-        <p class="profile-sub">${subLine || "&nbsp;"}</p>
-        ${detailBits.length ? `<p class="profile-details">${detailBits.join(" · ")}</p>` : ""}
-        ${player.bio ? `<p class="profile-bio">${player.bio}</p>` : ""}
+        <h1 class="profile-name">${esc(player.first_name)} ${esc(player.last_name)}</h1>
+        <p class="profile-sub">${subLine ? esc(subLine) : "&nbsp;"}</p>
+        ${detailBits.length ? `<p class="profile-details">${esc(detailBits.join(" · "))}</p>` : ""}
+        ${player.bio ? `<p class="profile-bio">${esc(player.bio)}</p>` : ""}
         ${isOwnProfile ? `
           <div class="profile-actions">
             <button class="profile-edit-btn" id="profile-edit-btn"><i class="fa-solid fa-pen"></i> Edit profile</button>
@@ -386,7 +387,7 @@
      try {
        stats = await fetchPlayerStats(player.player_id);
      } catch (err) {
-       grid.innerHTML = `<p class="profile-empty-stats">Couldn't load stats right now (${err.message || "network error"}).</p>`;
+       grid.innerHTML = `<p class="profile-empty-stats">Couldn't load stats right now (${esc(err.message || "network error")}).</p>`;
        return;
      }
    

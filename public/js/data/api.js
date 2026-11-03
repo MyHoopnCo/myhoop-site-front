@@ -45,6 +45,14 @@
      return body.data.players;
    }
     
+   // Admin dashboard only (GET /api/players/admin, protected by restrictTo('admin')):
+   // full rows incl. email and deactivated accounts. The public Hub keeps using
+   // fetchPlayers() above, which returns the whitelisted fields only.
+   export async function fetchPlayersAdmin() {
+     const body = await request("/players/admin");
+     return body.data.players;
+   }
+    
    export async function fetchPlayerBySlug(slug) {
      const body = await request(`/players/slug/${encodeURIComponent(slug)}`);
      return body.data.player;

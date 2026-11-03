@@ -7,6 +7,7 @@
    ═══════════════════════════════════════════════════════════ */
 
    import { fetchLeaderboard } from "../data/api.js";
+   import { esc } from "../utils/escape.js";
 
    const tabs = document.getElementById("leaderboard-tabs");
    const list = document.getElementById("leaderboard-list");
@@ -30,11 +31,11 @@
 
      rows.slice(0, 5).forEach((row, i) => {
        const item = document.createElement("a");
-       item.href = `players.html?slug=${row.slug}`;
+       item.href = `players.html?slug=${encodeURIComponent(row.slug)}`;
        item.className = "leaderboard-row";
        item.innerHTML = `
          <span class="rank">${i + 1}</span>
-         <span class="lb-name">${row.first_name} ${row.last_name}</span>
+         <span class="lb-name">${esc(row.first_name)} ${esc(row.last_name)}</span>
          <span class="lb-value">${valueFor(row, type)}</span>
        `;
        list.appendChild(item);

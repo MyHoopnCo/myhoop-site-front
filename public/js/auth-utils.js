@@ -1,8 +1,15 @@
 /* Shared helpers for sign-in / sign-up redirect handling. */
 
+// Accepte seulement une adresse qui reste sur ce site. On laisse le navigateur la résoudre
+// (new URL) plutôt que de filtrer à la main : « /\evil.com » passait l'ancien filtre.
 export function safeRedirect(value) {
-  if (!value || value.startsWith("//") || value.includes("://")) return "index.html";
-  if (value.startsWith("/") || /^[\w.-]+\.html(\?.*)?$/.test(value)) return value;
+  if (!value) return "index.html";
+  try {
+    const url = new URL(value, window.location.origin);
+    if (url.origin === window.location.origin) return url.pathname + url.search + url.hash;
+  } catch (_) {
+    /* valeur illisible : on retombe sur l'accueil */
+  }
   return "index.html";
 }
 
@@ -30,7 +37,8 @@ export function initPasswordToggle(inputId, buttonId) {
 
 /* Shows a brief floating confirmation toast, then calls onDone
    (used to redirect the person back to where they came from without
-   forcing them onto a separate "you're signed in" page). */
+   forcing them onto a separate "you're signed in" page).
+   `message` is HTML: callers must esc() any name they put in it. */
 export function showAuthToast(message, onDone, delay = 1500) {
   const toast = document.createElement("div");
   toast.className = "auth-toast";

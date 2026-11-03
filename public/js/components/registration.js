@@ -14,6 +14,7 @@
 
    import { fetchCurrentUser, fetchMyRegistrations, submitRegistration, submitPayment } from "../data/api.js";
    import { INTERAC_EMAIL } from "../config.js";
+   import { esc } from "../utils/escape.js";
 
    const overlay = document.getElementById("reg-overlay");
    const box = document.getElementById("reg-box");
@@ -35,8 +36,8 @@
          <div><h3>Already registered</h3></div>
          <button class="reg-close" id="reg-close" aria-label="Close">✕</button>
        </div>
-       <p>You're already registered for ${tournament.name}.</p>
-       <span class="registration-badge ${registration.status}">${STATUS_LABELS[registration.status] || registration.status}</span>
+       <p>You're already registered for ${esc(tournament.name)}.</p>
+       <span class="registration-badge ${esc(registration.status)}">${esc(STATUS_LABELS[registration.status] || registration.status)}</span>
      `;
    }
 
@@ -57,7 +58,7 @@
        <div class="reg-row">
          <div class="reg-field">
            <label>Registering as</label>
-           <input type="text" value="${user.first_name} ${user.last_name}" disabled />
+           <input type="text" value="${esc(user.first_name)} ${esc(user.last_name)}" disabled />
          </div>
        </div>
 
@@ -93,7 +94,7 @@
          <h4>One last step — payment</h4>
          <p>Entry fee: <strong>$${entryFee}</strong></p>
          <p>Send an Interac e-Transfer to <strong>${INTERAC_EMAIL}</strong> and include
-            <strong>"${fullName}"</strong> as the reference/note, so we can match it to your registration.</p>
+            <strong>"${esc(fullName)}"</strong> as the reference/note, so we can match it to your registration.</p>
          <p class="reg-waitlist-note">You're on the waitlist until we can verify your payment was sent. Thank you!</p>
          <button class="reg-submit" id="reg-payment-sent" type="button">I've sent the payment</button>
          <p class="reg-status" id="reg-payment-status"></p>
@@ -124,7 +125,7 @@
        <div class="reg-head">
          <div>
            <h3>Register</h3>
-           <p>${tournament.name} · ${new Date(tournament.starts_at).toLocaleDateString("en-US", { month: "long", day: "numeric" })} · ${tournament.location}</p>
+           <p>${esc(tournament.name)} · ${new Date(tournament.starts_at).toLocaleDateString("en-US", { month: "long", day: "numeric" })} · ${esc(tournament.location)}</p>
            <p class="reg-fee">${entryFee > 0 ? `Entry fee: $${entryFee}` : "Free entry"}</p>
          </div>
          <button class="reg-close" id="reg-close" aria-label="Close">✕</button>
