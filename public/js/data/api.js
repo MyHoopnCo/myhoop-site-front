@@ -196,6 +196,73 @@
      }
    }
  
+   /* ── Registering WITHOUT an account ─────────────────────────
+      Three routes volontairement publiques : la page d'inscription
+      d'un tournoi doit fonctionner pour quelqu'un qui n'a pas de
+      compte. Aucune ne renvoie de données personnelles — le
+      formulaire, ce sont des questions; l'inscription, un numéro.
+      ═══════════════════════════════════════════════════════════ */
+
+   // Les questions que CE tournoi pose. Elles viennent de la base, pas du
+   // code : un tournoi peut demander la taille de chandail, un autre non.
+   export async function fetchTournamentForm(tournamentId) {
+     const body = await request(`/registrations/form/${encodeURIComponent(tournamentId)}`);
+     return body.data;   // { tournament, form: { form_id, name, fields } }
+   }
+
+   // payload : { tournament_id, first_name, last_name, email, phone?, answers }
+   // La réponse ne contient que le numéro d'inscription et son statut.
+   export async function submitGuestRegistration(payload) {
+     const body = await request("/registrations/guest", {
+       method: "POST",
+       body: JSON.stringify(payload),
+     });
+     return body.data.registration;
+   }
+
+   // « J'ai envoyé le virement », sans compte. Le numéro d'inscription tient
+   // lieu de preuve : c'est un identifiant aléatoire remis à l'inscription.
+   export async function submitGuestPayment(registrationId, senderName) {
+     const body = await request("/payments/guest", {
+       method: "POST",
+       body: JSON.stringify({ registration_id: registrationId, transfer_sender_name: senderName }),
+     });
+     return body.data.payment;
+   }
+
+   // Réclamer les inscriptions faites sans compte, une fois le compte créé.
+   // Jamais automatique : le courriel ET le nom doivent correspondre à ce qui
+   // a été saisi lors de l'inscription.
+   export async function claimRegistrations(email, lastName) {
+     const body = await request("/registrations/claim", {
+       method: "POST",
+       body: JSON.stringify({ email, last_name: lastName }),
+     });
+     return body.data;   // { claimed, message }
+   }
+
+   /* ── Own profile and visibility ─────────────────────────────
+      La fiche complète du joueur lui-même (publiée ou non), et
+      l'interrupteur « profil public ». Les deux sont protégés :
+      ce ne sont pas les routes publiques, qui ne montrent que les
+      joueurs ayant choisi d'être visibles.
+      ═══════════════════════════════════════════════════════════ */
+
+   export async function fetchOwnProfile(playerId) {
+     const body = await request(`/players/${playerId}/me`);
+     return body.data.player;
+   }
+
+   // payload : { is_public?, show_contact?, instagram_handle?, public_contact_email? }
+   // On n'envoie que ce qu'on change; le reste garde sa valeur.
+   export async function updateVisibility(playerId, payload) {
+     const body = await request(`/players/${playerId}/visibility`, {
+       method: "PATCH",
+       body: JSON.stringify(payload),
+     });
+     return body.data.player;
+   }
+
    /* ── Payments (Interac e-Transfer, confirmed manually by an admin) ─ */
  
    export async function submitPayment(payload) {

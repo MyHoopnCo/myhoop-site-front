@@ -12,6 +12,7 @@ const navbarHTML = `
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="entertainment.html">The Hub</a>
+        <a href="league.html">League</a>
         <a href="calendar.html">Calendar</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -35,6 +36,7 @@ const navbarHTML = `
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="entertainment.html">The Hub</a>
+      <a href="league.html">League</a>
       <a href="calendar.html">Calendar</a>
       <a href="contact.html">Contact</a>
       <div id="navAuthMobile"></div>

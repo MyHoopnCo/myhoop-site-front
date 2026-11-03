@@ -87,6 +87,7 @@
   }
   
   .reg-field input,
+  .reg-field select,
   .reg-field textarea {
     font-family: var(--font-body);
     font-size: 0.92rem;
@@ -97,6 +98,7 @@
   }
   
   .reg-field input:focus,
+  .reg-field select:focus,
   .reg-field textarea:focus {
     outline: none;
     border-color: var(--orange);
