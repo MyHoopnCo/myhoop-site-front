@@ -18,6 +18,15 @@ const switchLink = document.getElementById("auth-switch-link");
 switchLink.href = `signin.html${redirectQueryString()}`;
 initPasswordToggle("signup-password", "signup-password-toggle");
 
+// Message de sécurité pour les 13-17 ans. L'âge est déclaré par la personne (il peut
+// être faux), donc le conseil s'affiche pour quiconque se déclare mineur.
+const ageInput = document.getElementById("signup-age");
+const minorNote = document.getElementById("signup-minor-note");
+ageInput.addEventListener("input", () => {
+  const age = Number(ageInput.value);
+  minorNote.hidden = !(age >= 13 && age < 18);
+});
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 

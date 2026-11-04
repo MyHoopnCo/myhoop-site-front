@@ -9,10 +9,10 @@
    ═══════════════════════════════════════════════════════════ */
  
    import {
-     fetchPlayerBySlug, fetchPlayerStats, fetchCurrentUser, updateAccount, changePassword,
-     fetchOwnProfile, updateVisibility,
+     fetchPlayerBySlug, fetchPlayerStats, fetchCurrentUser, updateAccount,
+     fetchOwnProfile,
    } from "./data/api.js";
-   import { initPasswordToggle, showAuthToast } from "./auth-utils.js";
+   import { showAuthToast } from "./auth-utils.js";
    import { esc } from "./utils/escape.js";
  
    const wrapper = document.getElementById("profile-wrapper");
@@ -93,7 +93,7 @@
          <div class="reg-row">
            <div class="reg-field">
              <label for="account-age">Age</label>
-             <input id="account-age" name="age" type="number" min="5" max="100" value="${esc(user.age)}" />
+             <input id="account-age" name="age" type="number" min="13" max="100" value="${esc(user.age)}" />
            </div>
            <div class="reg-field">
              <label for="account-phone">Phone</label>
@@ -177,144 +177,10 @@
      });
    }
  
-   /* ── Change password (separate flow, own cooldown) ──────────
-      A first password change is always allowed. After that, the
-      backend enforces a 30-day cooldown between changes — this
-      form just reflects that state, it never enforces it itself.
-      Expects fetchCurrentUser() to include password_changed_at
-      (ISO string, or null/absent if never changed). ─────────── */
- 
-   function nextPasswordChangeDate(user) {
-     if (!user.password_changed_at) return null; // never changed yet — no cooldown
-     const changedAt = new Date(user.password_changed_at);
-     const next = new Date(changedAt.getTime() + 30 * 24 * 60 * 60 * 1000);
-     return next > new Date() ? next : null;
-   }
- 
-   function formatDate(date) {
-     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-   }
- 
-   function passwordCooldownMarkup(availableOn) {
-     return `
-       <div class="reg-head">
-         <div><h3>Change password</h3></div>
-         <button class="reg-close" id="account-close" aria-label="Close">✕</button>
-       </div>
-       <p class="reg-cooldown-notice">
-         <i class="fa-solid fa-lock"></i>
-         You already changed your password recently. For security, you can
-         change it again on <strong>${formatDate(availableOn)}</strong>.
-       </p>
-     `;
-   }
- 
-   function passwordFieldsMarkup() {
-     return `
-       <div class="reg-head">
-         <div><h3>Change password</h3><p>Enter your current password, then choose a new one.</p></div>
-         <button class="reg-close" id="account-close" aria-label="Close">✕</button>
-       </div>
-       <form class="reg-form" id="password-form">
-         <div class="reg-field">
-           <label for="pw-current">Current password</label>
-           <div class="auth-password-wrap">
-             <input id="pw-current" name="current_password" type="password" required />
-             <button type="button" class="auth-password-toggle" id="pw-current-toggle" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
-           </div>
-         </div>
- 
-         <div class="reg-field">
-           <label for="pw-new">New password</label>
-           <div class="auth-password-wrap">
-             <input id="pw-new" name="new_password" type="password" minlength="8" required />
-             <button type="button" class="auth-password-toggle" id="pw-new-toggle" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
-           </div>
-         </div>
- 
-         <div class="reg-field">
-           <label for="pw-confirm">Confirm new password <span class="hint">must match</span></label>
-           <div class="auth-password-wrap">
-             <input id="pw-confirm" name="confirm_password" type="password" minlength="8" required />
-             <button type="button" class="auth-password-toggle" id="pw-confirm-toggle" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
-           </div>
-         </div>
- 
-         <p class="reg-field-note">Password must be at least 8 characters long and contain one number.</p>
- 
-         <button class="reg-submit" type="submit">Change password</button>
-         <p class="reg-status" id="password-status"></p>
-       </form>
-     `;
-   }
- 
-   function openPasswordModal(user, onChanged) {
-     const cooldownUntil = nextPasswordChangeDate(user);
- 
-     if (cooldownUntil) {
-       box.innerHTML = passwordCooldownMarkup(cooldownUntil);
-       overlay.classList.add("open");
-       document.body.style.overflow = "hidden";
-       box.querySelector("#account-close").addEventListener("click", closeEditor);
-       return;
-     }
- 
-     box.innerHTML = passwordFieldsMarkup();
-     overlay.classList.add("open");
-     document.body.style.overflow = "hidden";
- 
-     box.querySelector("#account-close").addEventListener("click", closeEditor);
-     initPasswordToggle("pw-current", "pw-current-toggle");
-     initPasswordToggle("pw-new", "pw-new-toggle");
-     initPasswordToggle("pw-confirm", "pw-confirm-toggle");
- 
-     const form = box.querySelector("#password-form");
-     const status = box.querySelector("#password-status");
- 
-     form.addEventListener("submit", async (e) => {
-       e.preventDefault();
-       const submitBtn = form.querySelector(".reg-submit");
- 
-       const current = form.elements.current_password.value;
-       const next = form.elements.new_password.value;
-       const confirm = form.elements.confirm_password.value;
- 
-       if (next !== confirm) {
-         status.textContent = "New password and confirmation don't match.";
-         status.dataset.state = "error";
-         return;
-       }
- 
-       status.textContent = "Saving...";
-       status.dataset.state = "pending";
-       submitBtn.disabled = true;
- 
-       try {
-         const updated = await changePassword(current, next);
-         closeEditor();
-         showAuthToast("Your password has been changed.", () => {}, 2000);
-         if (typeof onChanged === "function") onChanged(updated);
-       } catch (err) {
-         if (err.status === 429 && err.retryAfter) {
-           status.textContent = `You can change your password again on ${formatDate(new Date(err.retryAfter))}.`;
-         } else {
-           status.textContent = err.message || "Something went wrong. Try again.";
-         }
-         status.dataset.state = "error";
-         submitBtn.disabled = false;
-       }
-     });
-   }
- 
-
-   /* ── Profil public : le choix du joueur ─────────────────────
-      Personne n'est public par défaut. Tant que le joueur ne l'a pas
-      demandé, sa fiche n'apparaît ni au Hub, ni au classement, ni dans
-      les leaders — son nom peut quand même figurer dans la composition
-      d'une équipe, parce qu'une équipe doit montrer qui en fait partie.
-
-      Montrer un moyen de le joindre est un SECOND choix, séparé : on
-      peut vouloir être vu par un coach sans publier son Instagram.
+   /* ── Profil privé : le bandeau ───────────────────────────────
+      Personne n'est public par défaut. Le CHOIX de se publier (et de montrer
+      un moyen de contact) vit sur la page « Mon compte » (account.html,
+      section confidentialité) : ici on ne fait que le dire et y mener.
       ═══════════════════════════════════════════════════════════ */
 
    function privateBannerMarkup() {
@@ -326,105 +192,8 @@
            Only you can see this page. Coaches and scouts can't find you,
            and you don't appear in the Hub, the leaderboard or the league leaders.
          </p>
-         <button class="profile-edit-btn" id="profile-go-public">Make my profile public</button>
+         <a class="profile-edit-btn" href="account.html#privacy">Make my profile public</a>
        </div>`;
-   }
-
-   function visibilityMarkup(user) {
-     const on = user.is_public === true;
-     const contactOn = user.show_contact === true;
-
-     return `
-       <div class="reg-head">
-         <div>
-           <h3>Who can see your profile</h3>
-           <p>You decide. Nothing here is on by default.</p>
-         </div>
-         <button class="reg-close" id="account-close" aria-label="Close">✕</button>
-       </div>
-       <form class="reg-form" id="visibility-form">
-         <label class="reg-check">
-           <input type="checkbox" name="is_public" ${on ? "checked" : ""} />
-           <span>
-             <strong>Show my profile publicly.</strong>
-             Your name, photo, position, height, city, age, school and your game
-             stats become visible to anyone, and you appear in the Hub, the
-             leaderboard and the league leaders.
-           </span>
-         </label>
-
-         <p class="reg-field-note">
-           Your email, your phone number and anything you gave at registration
-           (emergency contact, medical notes) are never shown, whatever you choose here.
-         </p>
-
-         <label class="reg-check">
-           <input type="checkbox" name="show_contact" ${contactOn ? "checked" : ""} />
-           <span>
-             <strong>Let people contact me.</strong>
-             Shows the two fields below on your public profile, so a coach can reach you.
-           </span>
-         </label>
-
-         <div class="reg-row">
-           <div class="reg-field">
-             <label for="vis-instagram">Instagram handle</label>
-             <input id="vis-instagram" name="instagram_handle" type="text"
-                    value="${esc(user.instagram_handle)}" placeholder="@yourhandle" />
-           </div>
-           <div class="reg-field">
-             <label for="vis-email">Public email <span class="hint">can differ from your account email</span></label>
-             <input id="vis-email" name="public_contact_email" type="email"
-                    value="${esc(user.public_contact_email)}" placeholder="you@example.com" />
-           </div>
-         </div>
-
-         <button class="reg-submit" type="submit">Save</button>
-         <p class="reg-status" id="visibility-status"></p>
-       </form>`;
-   }
-
-   function openVisibilityModal(user, onSaved) {
-     box.innerHTML = visibilityMarkup(user);
-     overlay.classList.add("open");
-     document.body.style.overflow = "hidden";
-
-     box.querySelector("#account-close").addEventListener("click", closeEditor);
-
-     const form = box.querySelector("#visibility-form");
-     const status = box.querySelector("#visibility-status");
-
-     form.addEventListener("submit", async (e) => {
-       e.preventDefault();
-       const submitBtn = form.querySelector(".reg-submit");
-
-       const payload = {
-         is_public: form.elements.is_public.checked,
-         show_contact: form.elements.show_contact.checked,
-         instagram_handle: form.elements.instagram_handle.value.trim(),
-         public_contact_email: form.elements.public_contact_email.value.trim(),
-       };
-
-       status.textContent = "Saving...";
-       status.dataset.state = "pending";
-       submitBtn.disabled = true;
-
-       try {
-         const updated = await updateVisibility(user.player_id, payload);
-         closeEditor();
-         showAuthToast(
-           updated.is_public
-             ? "Your profile is public now."
-             : "Your profile is private again.",
-           () => {}, 2500
-         );
-         if (typeof onSaved === "function") onSaved(updated);
-       } catch (err) {
-         status.textContent = err.message || "Something went wrong. Try again.";
-         status.dataset.state = "error";
-         submitBtn.disabled = false;
-       }
-     });
    }
 
    function closeEditor() {
@@ -502,7 +271,7 @@
   // Render the header immediately — don't let a stats failure leave the
   // whole page blank while we wait on a second network call.
   wrapper.innerHTML = `
-    ${privateView ? privateBannerMarkup() : ""}
+    ${privateView && currentUser.is_active !== false ? privateBannerMarkup() : ""}
     <div class="profile-header">
       <img class="profile-photo" src="${esc(player.avatar_url || AVATAR_FALLBACK)}" alt="${esc(player.first_name)} ${esc(player.last_name)}" />
       <div class="profile-info">
@@ -514,11 +283,7 @@
         ${isOwnProfile ? `
           <div class="profile-actions">
             <button class="profile-edit-btn" id="profile-edit-btn"><i class="fa-solid fa-pen"></i> Edit profile</button>
-            <button class="profile-password-btn" id="profile-password-btn"><i class="fa-solid fa-lock"></i> Change password</button>
-            <button class="profile-edit-btn" id="profile-visibility-btn">
-              <i class="fa-solid ${privateView ? "fa-eye-slash" : "fa-eye"}"></i>
-              ${privateView ? "Private profile" : "Public profile"}
-            </button>
+            <a class="profile-account-link" href="account.html">Account &amp; privacy</a>
           </div>
         ` : ""}
       </div>
@@ -536,23 +301,6 @@
          // bio, since that's normally only returned on the public profile) —
          // merge it in so the field starts pre-filled with the real value.
          openEditor({ ...currentUser, bio: player.bio }, () => render());
-       });
-       document.getElementById("profile-password-btn").addEventListener("click", () => {
-         openPasswordModal(currentUser, () => render());
-       });
-       document.getElementById("profile-visibility-btn").addEventListener("click", () => {
-         // `player` vient de la route protégée quand le profil est privé, donc
-         // il porte is_public, show_contact et les coordonnées.
-         openVisibilityModal({ ...currentUser, ...player }, () => render());
-       });
-     }
-
-     // Le bandeau du haut mène à la même fenêtre : c'est le chemin le plus
-     // court pour quelqu'un qui découvre que son profil est invisible.
-     const goPublic = document.getElementById("profile-go-public");
-     if (goPublic) {
-       goPublic.addEventListener("click", () => {
-         openVisibilityModal({ ...currentUser, ...player }, () => render());
        });
      }
    

@@ -28,7 +28,7 @@
      }
     
      if (!res.ok) {
-       const message = body?.message || `Request failed (${res.status})`;
+       const message = body?.message || body?.error || `Request failed (${res.status})`;
        const err = new Error(message);
        err.status = res.status;
        err.body = body;

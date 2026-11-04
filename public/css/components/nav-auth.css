@@ -63,3 +63,112 @@
   @media (max-width: 900px) {
     .nav-auth { display: none; }
   }
+
+/* ── Menu sous l'avatar (connecté) ───────────────────────────
+   Mon profil / Mon compte / Sign out. Sur téléphone, les mêmes
+   liens vivent dans le tiroir (voir .mobile-signout plus bas). */
+
+.nav-user { position: relative; }
+
+.nav-user-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.nav-user-btn:hover { color: var(--orange); }
+.nav-user-caret { font-size: 0.75rem; opacity: 0.8; }
+
+.nav-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 14px);
+  min-width: 190px;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+
+.nav-menu[hidden] { display: none; }
+
+.nav-menu a,
+.nav-menu-signout {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.nav-menu a:hover,
+.nav-menu-signout:hover { background: var(--light); color: var(--orange); }
+
+/* La déconnexion est facile à trouver mais discrète : séparée, sans couleur vive. */
+.nav-menu-signout {
+  margin-top: 4px;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 6px 6px;
+  color: var(--gray);
+}
+
+/* Tiroir mobile : le bouton imite les liens de .mobile-nav. */
+.mobile-signout {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+  padding: 1.1rem 0;
+  cursor: pointer;
+}
+
+.mobile-signout:hover { color: var(--orange); }
+
+/* ── Compte désactivé : bandeau sous la barre de navigation ── */
+.deactivated-bar {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 100%;
+  z-index: 49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 1rem;
+  background: #fdf0d5;
+  border-bottom: 1px solid #e8d3a3;
+  color: #6b4d12;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.deactivated-bar button {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--orange);
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.deactivated-bar button:disabled { opacity: 0.6; cursor: not-allowed; }
