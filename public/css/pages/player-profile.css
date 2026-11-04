@@ -229,3 +229,22 @@
   line-height: 1.5;
   margin: -0.25rem 0 0.75rem;
 }
+
+/* Lien discret vers la page « Mon compte » (mot de passe, confidentialité,
+   désactivation) : le profil montre qui je suis, le compte se gère ailleurs. */
+.profile-account-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-decoration: none;
+  padding: 9px 4px;
+  transition: color 0.2s ease;
+}
+
+.profile-account-link:hover { color: var(--orange); }
+
+/* Le bandeau « profil privé » contient maintenant un lien, pas un bouton. */
+a.profile-edit-btn { text-decoration: none; }

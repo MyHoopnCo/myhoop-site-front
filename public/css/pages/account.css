@@ -1,0 +1,144 @@
+/* ── MY ACCOUNT (account.html) ───────────────────────────── */
+/* Profil = se montrer. Compte = entrer et gérer. Cette page est la seconde. */
+
+.account-section {
+  background: var(--white);
+  padding: 130px 2rem 5rem;
+  min-height: 70vh;
+}
+
+.account-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  color: var(--black);
+}
+
+.account-wrapper [hidden] { display: none !important; }
+
+.account-title {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  letter-spacing: 2px;
+  margin: 0 0 6px;
+}
+
+.account-sub {
+  font-size: 0.95rem;
+  color: var(--gray);
+  margin: 0 0 2rem;
+}
+
+.account-sub a,
+.account-hint a { color: var(--orange); font-weight: 700; }
+
+.account-loading { color: var(--gray); }
+
+/* Une carte par sujet : connexion, confidentialité, zone à risque. */
+.account-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  scroll-margin-top: 90px;
+}
+
+.account-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  margin: 0 0 1rem;
+}
+
+.account-card p { font-size: 0.92rem; line-height: 1.5; margin: 0 0 0.75rem; }
+
+.account-lead { color: var(--gray); }
+
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 0;
+  border-top: 1px solid #eee;
+}
+
+.account-row:first-of-type { border-top: none; padding-top: 0; }
+.account-row p { margin: 2px 0 0; color: var(--gray); }
+
+.account-hint { font-size: 0.8rem !important; color: var(--gray); }
+
+.account-panel { padding: 0.5rem 0 1rem; }
+
+.account-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.account-notice {
+  background: var(--light);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.account-btn,
+.account-danger-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.account-btn {
+  color: var(--black);
+  background: var(--light);
+  border: 1.5px solid #ddd;
+}
+
+.account-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+.account-btn-primary {
+  color: var(--white);
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.account-btn-primary:hover { color: var(--white); opacity: 0.9; }
+
+.account-danger-btn {
+  color: #a32020;
+  background: var(--white);
+  border: 1.5px solid #a32020;
+}
+
+.account-danger-btn:hover { color: var(--white); background: #a32020; }
+
+.account-btn:disabled,
+.account-danger-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* La zone à risque est séparée du reste, en bas, avec sa propre couleur. */
+.account-danger { border-color: #e8b4b0; }
+.account-danger h2 { color: #a32020; }
+
+/* Message pour les moins de 18 ans. */
+.account-safety {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fdf0d5;
+  border: 1px solid #e8d3a3;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.1rem;
+  color: #6b4d12;
+}
+
+.account-safety i { margin-top: 3px; }
+.account-card .account-safety p { margin: 0; font-size: 0.88rem; }
+
+@media (max-width: 600px) {
+  .account-section { padding: 110px 1.25rem 3rem; }
+  .account-title { font-size: 2.1rem; }
+  .account-card { padding: 1.15rem; }
+}

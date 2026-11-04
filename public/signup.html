@@ -55,14 +55,25 @@
 
         <div class="auth-row">
           <div class="auth-field">
-            <label for="signup-age">Age</label>
-            <input id="signup-age" name="age" type="number" min="5" max="100" />
+            <label for="signup-age">Age <span class="auth-hint">13 or older</span></label>
+            <input id="signup-age" name="age" type="number" min="13" max="100" required />
           </div>
           <div class="auth-field">
             <label for="signup-phone">Phone</label>
             <input id="signup-phone" name="phone" type="tel" />
           </div>
         </div>
+
+        <!-- Affiché seulement si l'âge saisi est entre 13 et 17 (voir signup-page.js). -->
+        <p class="auth-safety" id="signup-minor-note" hidden>
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>
+            <strong>Under 18? Be careful what you make public.</strong>
+            Your profile is private until you choose to share it. If you do,
+            anyone can see it, so never post your phone number, home address or
+            school schedule. You can switch back to private at any time.
+          </span>
+        </p>
 
         <div class="auth-field">
           <label for="signup-city">City</label>
